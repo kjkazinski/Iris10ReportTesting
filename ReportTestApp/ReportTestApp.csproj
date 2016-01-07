@@ -880,13 +880,13 @@
     <Folder Include="Views\Treeview\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Documents\Visual Studio 2015\Projects\ReportLibrary2\ReportLibrary2\ReportLibrary2.csproj">
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ReportLibrary2\ReportLibrary2\ReportLibrary2.csproj">
       <Project>{f687edb6-e1d4-4e0d-a9a8-0b17b8b929bc}</Project>
       <Name>ReportLibrary2</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

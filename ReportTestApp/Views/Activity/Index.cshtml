@@ -72,7 +72,7 @@
 
 
 
-<button onclick="insertItem()">Insert new item</button><button onclick="CreateObject()">Create Object</button><button onclick="@("window.location.href='" + @Url.Action("ReportViewerView1", "Home") + "'");">View Report</button>
+<button onclick="insertItem()">Insert new item</button><button onclick="CreateObject()">Create Object</button>
 
 @(Html.Kendo().Grid<ActivityModel>()
             .Name("Grid")
@@ -114,13 +114,13 @@
             .Groupable()
             .ColumnMenu()
             .Filterable()
-            .Pageable()
+            //.Pageable()
             .Editable(settings => settings.Enabled(true))
             .Reorderable(reordering => reordering.Columns(true))
 )
 
 <script>
-    
+
     function insertItem() {
         var grid = $("#Grid").data("kendoGrid");
         grid.addRow();
@@ -153,6 +153,7 @@
             data: { 'columnData': JSON.stringify(fields), 'columnName':JSON.stringify(fieldsDisplay), 'groupData': JSON.stringify(groups) },
             success: function (data) {
                 alert(data);
+                window.location.href = '@Url.Action("ReportViewerView1", "Home")';
             }
         });
     }
