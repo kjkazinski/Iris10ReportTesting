@@ -1,0 +1,24 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+  @using Telerik.Reporting
+  @using Telerik.ReportViewer.WebForms
+  
+<form id="main" method="post" action="">
+    <telerik:ReportViewer ID="ReportViewer1" Width="100%" Height="800px" runat="server">
+    </telerik:ReportViewer>
+</form>
+<script runat="server">
+    public override void VerifyRenderingInServerForm(Control control)
+     {
+    // to avoid the server form (<form runat="server"> requirement
+     }
+    protected override void OnLoad(EventArgs e)
+     {
+    base.OnLoad(e);
+         var instanceReportSource = new Telerik.Reporting.InstanceReportSource();
+         instanceReportSource.ReportDocument = new Dashboard();
+         ReportViewer1.ReportSource = instanceReportSource;
+     }
+</script>

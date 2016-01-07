@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" href="styles/kendo.common.min.css" />
+    <link rel="stylesheet" href="styles/kendo.default.min.css" />
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/kendo.all.min.js"></script>
+    <script src="~/Scripts/ListSource.js"></script>
+</head>
+<body>
+    <div id="PipelineStructureMajor"></div>
+    <button id="createandorinsert" class="k-button hugebtn">Send</button>
+    <script>
+
+        var sat = activity();
+
+    var pipelinetree = $("#PipelineStructureMajor").kendoTreeView({
+        dataSource: kendo.observableHierarchy(sat),
+        dragDrop: true
+    }).data("kendoTreeView");
+
+
+
+$('#createandorinsert').click(function (e) {
+
+    //TreeView's current datasource
+    var tree = $("#PipelineStructureMajor").data("kendoTreeView").dataSource.data();
+
+    $.ajax({
+      //  url: '../Structure/FtpCreateAndOrSync',
+        type: 'POST',
+        data: {
+            xmlNodes: JSON.stringify(tree)
+        },
+        beforeSend: function (xhr) {
+            alertSpan.removeClass().addClass("loading");
+        },
+        success: function (result, status, xhr) {
+            alertSpan.removeClass().addClass("success");
+        },
+        error: function (jqXhr, textStatus, errorThrown) {
+            alertSpan.removeClass().addClass("error");
+        }
+    });
+});
+    </script>
+        
+       
+
+
+</body>
+</html>

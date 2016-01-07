@@ -1,0 +1,212 @@
+﻿@using IrisWeb.Code.Extensions;
+@using IrisWeb.Code.Data.Models.Database;
+@using IrisWeb
+@using ReportTestApp.Columns.Settings
+@using System.Reflection
+@model List<ActivityModel>
+
+@{
+    ViewBag.Title = "Data Page";
+}
+
+
+@*<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Kendo UI Snippet</title>
+
+    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2015.3.1111/styles/kendo.common.min.css" />
+    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2015.3.1111/styles/kendo.rtl.min.css" />
+    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2015.3.1111/styles/kendo.silver.min.css" />
+    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2015.3.1111/styles/kendo.mobile.all.min.css" />
+
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="http://kendo.cdn.telerik.com/2015.3.1111/js/kendo.all.min.js"></script>
+</head>
+<body>
+
+
+    <div id="spreadsheet">
+    </div>
+
+    <script>
+        var dataSource = new kendo.data.DataSource();
+        $(document).ready(function () {
+            $.ajax({
+                dataType: "json",
+                url: '@Url.Action("GetStuff", "Home")',
+                data: { 'myTable': "Activity" },
+                success: function (data) {
+                    dataSource.data(data);
+                }
+            });
+        });
+
+        $("#spreadsheet").kendoSpreadsheet({
+            sheetsbar: false,
+            dataSource: dataSource
+        });
+        
+    </script>
+</body>
+</html>*@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<button onclick="insertItem()">Insert new item</button><button onclick="CreateObject()">Create Object</button><button onclick="@("window.location.href='" + @Url.Action("ReportViewerView1", "Home") + "'");">View Report</button>
+
+@(Html.Kendo().Grid<ActivityModel>()
+            .Name("Grid")
+            .BindTo(Model)
+            .DataSource(dataSource => dataSource // Configure the grid data source
+            .Ajax()
+            .Aggregates(aggregates =>
+                   {
+                       //aggregates.Add(p => p.Bill_Rate).Sum();
+                       //aggregates.Add(p => p.Employee_Rate).Average();
+                       aggregates.Add(p => p.UOM_Key).Count();
+                   })
+            .ServerOperation(false)
+            .Model(model =>
+            {
+                model.Id(x => x.SecurityUser_Key);
+            })
+                .Read(read => read.Action("Employee_Read", "Activity")) // Set the action method which will return the data in JSON format
+                .Update(update => update.Action("Employee_Read", "Activity"))
+                )
+            .Columns(columns =>
+            {
+            columns.Command(cmd => cmd.Edit()).Title("Edit");
+            //foreach (MyColumnSettings col in Model.GridColumns)
+            //{
+            //        MemberInfo info = typeof(ActivityModel);
+            //    columns.Bound(col.PropertyName).Title(col.Title).Width(col.Width);
+            //}
+            @*columns.Template(@<button type="button">+</button>).Title("Edit").ClientTemplate("#= AppendZeroPODButton(Id,IsPOD) #");*@
+                //Dollars
+                //.Format("{0:c}").ClientFooterTemplate("Total: #=kendo.format('{0:c}', sum)#").ClientGroupFooterTemplate("Sub Total: #=kendo.format('{0:c}', sum)#");
+                //.Format("{0:c}").ClientFooterTemplate("Average: #=kendo.format('{0:c}', average)#").ClientGroupFooterTemplate("Sub average: #=kendo.format('{0:c}', average)#");
+                columns.Bound(p => p.Activity_Key).Title("Activity Key");
+                columns.Bound(p => p.DateStamp).Title("Date");
+                columns.Bound(p => p.Description).Title("Description").Width("300px");
+                columns.Bound(p => p.UOM_Key).Title("UOM").Width("300px").ClientFooterTemplate("Count: #=kendo.format('{0}', count)#").ClientGroupFooterTemplate("Sub Count: #=kendo.format('{0}', count)#");
+            })
+            .Sortable()
+            .Groupable()
+            .ColumnMenu()
+            .Filterable()
+            .Pageable()
+            .Editable(settings => settings.Enabled(true))
+            .Reorderable(reordering => reordering.Columns(true))
+)
+
+<script>
+    
+    function insertItem() {
+        var grid = $("#Grid").data("kendoGrid");
+        grid.addRow();
+        $(".k-grid-edit-row").appendTo("#Grid tbody");
+    }
+
+    function CreateObject() {
+        var test = $("#Grid").getKendoGrid();
+        var fields = [];
+        var fieldsDisplay = [];
+        var groups = [];
+        for (var k = 0; k < test.dataSource.options.fields.length; k++) {
+            if (test.dataSource.options.fields[k].hidden != true && test.dataSource.options.fields[k].title != "Edit") {
+                fields.push(test.dataSource.options.fields[k].field);
+                fieldsDisplay.push(test.dataSource.options.fields[k].title);
+            }
+        }
+        if (test.dataSource.group().length != 0) {
+            for (var k = 0; k < test.dataSource.group().length; k++) {
+                groups.push(test.dataSource.group()[k].field);
+            }
+        }
+        alert(fields.length);
+        //alert("This is the first column data source: " + test.dataSource.options.fields[1].field+
+        //"\nThis is the first group: " + test.dataSource.group()[0].field+
+        //"\nThis is the sort direction: " + test.dataSource.group()[0].dir);
+        $.ajax({
+            type: "get",
+            url: '@Url.Action("GetGridData", "Activity")', //'columnData': JSON.stringify(test.dataSource.options.fields)
+            data: { 'columnData': JSON.stringify(fields), 'columnName':JSON.stringify(fieldsDisplay), 'groupData': JSON.stringify(groups) },
+            success: function (data) {
+                alert(data);
+            }
+        });
+    }
+
+</script>
+
+
+@*@(
+        Html.Kendo().Grid(Model)
+        .Name("MyGrid")
+        .DataSource(dataSource => dataSource
+        .Ajax()
+        .PageSize(10)
+        .Events(events => events.Error("error_Handler"))
+        .Model(model =>
+        {
+            model.Id(x => x.Activity_Key);
+        })
+        .Create(update => update.Action("_Edit", "Account"))
+        .Read(read => read.Action("_List", "Account"))
+        .Update(update => update.Action("_Edit", "Account"))
+        )
+        .Editable(settings => settings.Enabled(true))
+        .ToolBar(commands => commands.Create())
+          .Mobile()
+          .Pageable()
+        .ColumnMenu()
+        .Sortable()
+        .Groupable()
+        .Filterable()
+//.Navigatable(navigation => navigation.Enabled(true))
+//  // .Events(e => e.Edit("grid_Edit"))
+//  .Reorderable(reordering => reordering.Columns(true))
+//.CellAction(cell =>
+//{
+//    if (cell.Column.Title == "Activity Key")
+//    {
+//        if (cell.DataItem.Activity_Key.Contains("FF"))
+//        {
+//            //Set the background of this cell only
+//            cell.HtmlAttributes["style"] = "background:blue;";
+//        }
+//    }
+//})
+//.RowAction(row =>
+//{
+//    // "DataItem" is the Product instance to which the current row is bound
+//    if (row.DataItem.Name.Contains("3"))
+//    {
+//        //Set the background of the entire row
+//        row.HtmlAttributes["style"] = "background:red;";
+//    }
+//})
+)*@
+
+
+

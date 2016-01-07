@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Adding Telerik HTML5 Report Viewer page log</title>
+    <style>
+        body {
+            background: #fff;
+            color: #505050;
+            font: 14px 'Segoe UI', tahoma, arial, helvetica, sans-serif;
+            margin: 20px;
+            padding: 0;
+        }
+
+        #header {
+            background: #efefef;
+            padding: 0;
+        }
+
+        /* Start: Toggle details */
+        label { 
+            top:0; 
+            left:0; 
+            font-weight:700; 
+            margin-top: 10px;
+            user-select: none;
+            -ms-user-select: none;
+        }
+
+            label:hover{
+                color: cadetblue;
+                border-color: #505050;
+            }
+
+        input#show, input#hide {
+            display:none;
+        }
+
+        ul#details {
+            transition: opacity 1s ease-out;
+            opacity: 0; 
+            height: 0;
+            font-size: 0;
+            overflow: hidden;
+        }
+
+        input#show:checked ~ .show:before {
+            content: "";
+        }
+
+        input#show:checked ~ .hide:before {
+            content: "Hide details";
+            border: solid;
+            padding: 3px;
+        }
+
+        input#hide:checked ~ .hide:before {
+            content: "";
+        }
+
+        input#hide:checked ~ .show:before {
+            content: "Show details"; 
+            border: solid;
+            padding: 3px;
+        }
+
+        input#show:checked ~ ul#details {
+            opacity: 1;
+            font-size: 100%;
+            height: auto;
+            padding: 10px;
+        }
+
+        input#hide:checked ~ ul#details {
+            transition: opacity 1s ease-out;
+            opacity: 0; 
+            height: 0;
+            font-size: 0;
+            overflow: hidden;
+        }
+
+        /* End: toggle details */
+
+
+        h1 {
+            font-size: 48px;
+            font-weight: normal;
+            margin: 0;
+            padding: 0 30px;
+            line-height: 150px;
+        }
+
+        p {
+            font-size: 18px;
+            color: #fff;
+            background: #969696;
+            padding: 0 30px;
+            line-height: 50px;
+        }
+
+        #main {
+            padding: 5px 30px;
+        }
+
+        .section {
+            width: 21.7%;
+            float: left;
+            margin: 0 0 0 40px;
+        }
+
+            .section h2 {
+                font-size: 13px;
+                text-transform: uppercase;
+                margin: 0;
+                border-bottom: 1px solid silver;
+                padding-bottom: 12px;
+                margin-bottom: 8px;
+            }
+
+            .section.first {
+                margin-left: 0;
+                width: 25%
+            }
+
+                .section.first h2 {
+                    font-size: 20px;
+                    text-transform: none;
+                    margin-bottom: 16px;
+                    border: none;
+                }
+
+                .section.first li {
+                    border-top: 1px solid silver;
+                    padding: 8px 0;
+                }
+
+            .section.last {
+                margin-right: 0;
+                width: 70%;
+            }
+            
+            .section.last h2 {
+                    font-size: 20px;
+                    text-transform: none;
+                    margin-bottom: 5px;
+                    border: none;
+                }
+
+            .section.last li {
+                padding: 4px 0;
+                border-bottom: solid;
+                border-bottom-width: 1px;
+                border-color: lightgray;
+            }
+            
+            .section.last ul{
+                padding-bottom:10px;   
+                margin-bottom: 10px; 
+            }
+            
+                
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            line-height: 20px;
+        }
+
+
+
+        a {
+            color: #267cb2;
+            text-decoration: none;
+        }
+
+            a:hover {
+                text-decoration: underline;
+            }
+
+
+    </style>
+</head>
+<body>
+
+    <div id="header">
+        <p>Congratulations! You've successfully added an HTML page with Telerik HTML5 Report Viewer</p>
+    </div>
+
+    <div id="main">
+        <div class="section first">
+            <h2>Telerik HTML5 MVC Report Viewer enabled application consists of: </h2>
+            <ul>
+                <li><a href="http://www.telerik.com/help/reporting/html5-report-viewer.html" >HTML5 Report Viewer</a> prerequisites</li>
+                <li>MVC page with HTML5 MVC Report Viewer</li>
+                <li><a href="http://www.telerik.com/help/reporting/telerik-reporting-rest-conception.html" >Telerik Reporting REST Service</a> with its prerequisites</li>
+            </ul>
+        </div>
+
+        <div class="section last">
+            <h2>Summary</h2>
+            <ul style="padding-bottom: 10px; padding-left: 7px;">
+                <li style="color: none;">Added 'ReportLibrary2.Properties.Settings.ZMarion' connection string to configuration file.</li>
+<li style="color: none;">Reference added: Telerik.Reporting.XpsRendering</li>
+<li style="color: none;">Installed NuGet package: Microsoft.AspNet.WebApi.WebHost 4.0.30506</li>
+<li style="color: #FF6600;">Warning: The referenced System.Net.Http assembly version is newer. You should add the following binding redirect:</li>
+<li style="color: none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;dependentAssembly&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;assemblyIdentity name="System.Net.Http" publicKeyToken="31BF3856AD364E35" /&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;bindingRedirect oldVersion="0.0.0.0-4.0.0.0" newVersion="4.0.0.0" /&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/dependentAssembly&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For more information see: <a href = 'http://msdn.microsoft.com/en-us/library/2fc472t2%28v=vs.100%29.aspx'>Assembly Binding Redirection</a> MSDN article</li>
+<li style="color: #FF6600;">Warning: The referenced System.Net.Http.WebRequest assembly version is newer. You should add the following binding redirect:</li>
+<li style="color: none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;dependentAssembly&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;assemblyIdentity name="System.Net.Http.WebRequest" publicKeyToken="31BF3856AD364E35" /&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;bindingRedirect oldVersion="0.0.0.0-4.0.0.0" newVersion="4.0.0.0" /&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/dependentAssembly&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For more information see: <a href = 'http://msdn.microsoft.com/en-us/library/2fc472t2%28v=vs.100%29.aspx'>Assembly Binding Redirection</a> MSDN article</li>
+<li style="color: #FF6600;">Warning: The referenced Newtonsoft.Json assembly version is newer. You should add the following binding redirect:</li>
+<li style="color: none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;dependentAssembly&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;assemblyIdentity name="Newtonsoft.Json" publicKeyToken="30ad4fe6b2a6aeed" /&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;bindingRedirect oldVersion="0.0.0.0-7.0.0.0" newVersion="7.0.0.0" /&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/dependentAssembly&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For more information see: <a href = 'http://msdn.microsoft.com/en-us/library/2fc472t2%28v=vs.100%29.aspx'>Assembly Binding Redirection</a> MSDN article</li>
+<li style="color: none;">Using System.Web.Http statement successfully added to Global.asax.cs</li>
+<li style="color: none;">Using Telerik.Reporting.Services.WebApi statement successfully added to Global.asax.cs</li>
+<li style="color: none;">Registered REST Report Service routes in Global.asax</li>
+<li style="color: none;">Added ReportViewerView1.cshtml</li>
+<li style="color: none;">Added telerikReportViewer-9.1.15.731.min.js</li>
+<li style="color: none;">Added telerikReportViewer-9.1.15.731.css</li>
+<li style="color: none;">Added telerikReportViewerTemplate-9.1.15.731.html</li>
+<li style="color: none;">Added ReportsController.cs</li>
+
+            </ul>
+
+            <input type="radio" id="show" name="group" />   
+            <input type="radio" id="hide" name="group" checked />
+            <label for="hide" class="hide" unselectable="on"></label>
+            <label for="show" class="show" unselectable="on"></label> 
+
+            <ul id="details">
+                9/17/2015 10:33:13 AM
+<li style="color: none;">Build Started</li>
+<li style="color: none;">Check Framework Support</li>
+<li style="color: none;">Assembly name is null: False</li>
+<li style="color: none;">Assembly : Antlr3.Runtime</li>
+<li style="color: none;">Assembly Version: 3.4.1.9004</li>
+<li style="color: none;">Product Version: 9.1.15.731</li>
+<li style="color: none;">Verify Telerik Reporting Version: True</li>
+<li style="color: none;">Assembly name is null: False</li>
+<li style="color: none;">Assembly : Kendo.Mvc</li>
+<li style="color: none;">Assembly Version: 2015.2.902.545</li>
+<li style="color: none;">Product Version: 9.1.15.731</li>
+<li style="color: none;">Verify Telerik Reporting Version: True</li>
+<li style="color: none;">Assembly name is null: False</li>
+<li style="color: none;">Assembly : Microsoft.CSharp</li>
+<li style="color: none;">Assembly Version: </li>
+<li style="color: none;">Product Version: 9.1.15.731</li>
+<li style="color: none;">Verify Telerik Reporting Version: True</li>
+<li style="color: none;">Assembly name is null: False</li>
+<li style="color: none;">Assembly : Microsoft.Web.Infrastructure</li>
+<li style="color: none;">Assembly Version: 1.0.0.0</li>
+<li style="color: none;">Product Version: 9.1.15.731</li>
+<li style="color: none;">Verify Telerik Reporting Version: True</li>
+<li style="color: none;">Assembly name is null: False</li>
+<li style="color: none;">Assembly : Newtonsoft.Json</li>
+<li style="color: none;">Assembly Version: 7.0.0.0</li>
+<li style="color: none;">Product Version: 9.1.15.731</li>
+<li style="color: none;">Verify Telerik Reporting Version: True</li>
+<li style="color: none;">Assembly name is null: False</li>
+<li style="color: none;">Assembly : System</li>
+<li style="color: none;">Assembly Version: </li>
+<li style="color: none;">Product Version: 9.1.15.731</li>
+<li style="color: none;">Verify Telerik Reporting Version: True</li>
+<li style="color: none;">Assembly name is null: False</li>
+<li style="color: none;">Assembly : System.Data</li>
+<li style="color: none;">Assembly Version: </li>
+<li style="color: none;">Product Version: 9.1.15.731</li>
+<li style="color: none;">Verify Telerik Reporting Version: True</li>
+<li style="color: none;">Assembly name is null: False</li>
+<li style="color: none;">Assembly : System.Data.Entity</li>
+<li style="color: none;">Assembly Version: </li>
+<li style="color: none;">Product Version: 9.1.15.731</li>
+<li style="color: none;">Verify Telerik Reporting Version: True</li>
+<li style="color: none;">Assembly name is null: False</li>
+<li style="color: none;">Assembly : System.Drawing</li>
+<li style="color: none;">Assembly Version: </li>
+<li style="color: none;">Product Version: 9.1.15.731</li>
+<li style="color: none;">Verify Telerik Reporting Version: True</li>
+<li style="color: none;">Assembly name is null: False</li>
+<li style="color: none;">Assembly : System.Web.DynamicData</li>
+<li style="color: none;">Assembly Version: </li>
+<li style="color: none;">Product Version: 9.1.15.731</li>
+<li style="color: none;">Verify Telerik Reporting Version: True</li>
+<li style="color: none;">Assembly name is null: False</li>
+<li style="color: none;">Assembly : System.Web.Entity</li>
+<li style="color: none;">Assembly Version: </li>
+<li style="color: none;">Product Version: 9.1.15.731</li>
+<li style="color: none;">Verify Telerik Reporting Version: True</li>
+<li style="color: none;">Assembly name is null: False</li>
+<li style="color: none;">Assembly : System.Web.ApplicationServices</li>
+<li style="color: none;">Assembly Version: </li>
+<li style="color: none;">Product Version: 9.1.15.731</li>
+<li style="color: none;">Verify Telerik Reporting Version: True</li>
+<li style="color: none;">Assembly name is null: False</li>
+<li style="color: none;">Assembly : System.ComponentModel.DataAnnotations</li>
+<li style="color: none;">Assembly Version: </li>
+<li style="color: none;">Product Version: 9.1.15.731</li>
+<li style="color: none;">Verify Telerik Reporting Version: True</li>
+<li style="color: none;">Assembly name is null: False</li>
+<li style="color: none;">Assembly : System.Core</li>
+<li style="color: none;">Assembly Version: </li>
+<li style="color: none;">Product Version: 9.1.15.731</li>
+<li style="color: none;">Verify Telerik Reporting Version: True</li>
+<li style="color: none;">Assembly name is null: False</li>
+<li style="color: none;">Assembly : System.Data.DataSetExtensions</li>
+<li style="color: none;">Assembly Version: </li>
+<li style="color: none;">Product Version: 9.1.15.731</li>
+<li style="color: none;">Verify Telerik Reporting Version: True</li>
+<li style="color: none;">Assembly name is null: False</li>
+<li style="color: none;">Assembly : System.Web.Helpers</li>
+<li style="color: none;">Assembly Version: 3.0.0.0</li>
+<li style="color: none;">Product Version: 9.1.15.731</li>
+<li style="color: none;">Verify Telerik Reporting Version: True</li>
+<li style="color: none;">Assembly name is null: False</li>
+<li style="color: none;">Assembly : System.Web.Mvc</li>
+<li style="color: none;">Assembly Version: 5.2.3.0</li>
+<li style="color: none;">Product Version: 9.1.15.731</li>
+<li style="color: none;">Verify Telerik Reporting Version: True</li>
+<li style="color: none;">Assembly name is null: False</li>
+<li style="color: none;">Assembly : System.Web.Optimization</li>
+<li style="color: none;">Assembly Version: 1.1.0.0</li>
+<li style="color: none;">Product Version: 9.1.15.731</li>
+<li style="color: none;">Verify Telerik Reporting Version: True</li>
+<li style="color: none;">Assembly name is null: False</li>
+<li style="color: none;">Assembly : System.Web.Razor</li>
+<li style="color: none;">Assembly Version: 3.0.0.0</li>
+<li style="color: none;">Product Version: 9.1.15.731</li>
+<li style="color: none;">Verify Telerik Reporting Version: True</li>
+<li style="color: none;">Assembly name is null: False</li>
+<li style="color: none;">Assembly : System.Web.WebPages</li>
+<li style="color: none;">Assembly Version: 3.0.0.0</li>
+<li style="color: none;">Product Version: 9.1.15.731</li>
+<li style="color: none;">Verify Telerik Reporting Version: True</li>
+<li style="color: none;">Assembly name is null: False</li>
+<li style="color: none;">Assembly : System.Web.WebPages.Deployment</li>
+<li style="color: none;">Assembly Version: 3.0.0.0</li>
+<li style="color: none;">Product Version: 9.1.15.731</li>
+<li style="color: none;">Verify Telerik Reporting Version: True</li>
+<li style="color: none;">Assembly name is null: False</li>
+<li style="color: none;">Assembly : System.Web.WebPages.Razor</li>
+<li style="color: none;">Assembly Version: 3.0.0.0</li>
+<li style="color: none;">Product Version: 9.1.15.731</li>
+<li style="color: none;">Verify Telerik Reporting Version: True</li>
+<li style="color: none;">Assembly name is null: False</li>
+<li style="color: none;">Assembly : System.Xml.Linq</li>
+<li style="color: none;">Assembly Version: </li>
+<li style="color: none;">Product Version: 9.1.15.731</li>
+<li style="color: none;">Verify Telerik Reporting Version: True</li>
+<li style="color: none;">Assembly name is null: False</li>
+<li style="color: none;">Assembly : System.Web</li>
+<li style="color: none;">Assembly Version: </li>
+<li style="color: none;">Product Version: 9.1.15.731</li>
+<li style="color: none;">Verify Telerik Reporting Version: True</li>
+<li style="color: none;">Assembly name is null: False</li>
+<li style="color: none;">Assembly : System.Web.Extensions</li>
+<li style="color: none;">Assembly Version: </li>
+<li style="color: none;">Product Version: 9.1.15.731</li>
+<li style="color: none;">Verify Telerik Reporting Version: True</li>
+<li style="color: none;">Assembly name is null: False</li>
+<li style="color: none;">Assembly : System.Web.Abstractions</li>
+<li style="color: none;">Assembly Version: </li>
+<li style="color: none;">Product Version: 9.1.15.731</li>
+<li style="color: none;">Verify Telerik Reporting Version: True</li>
+<li style="color: none;">Assembly name is null: False</li>
+<li style="color: none;">Assembly : System.Web.Routing</li>
+<li style="color: none;">Assembly Version: </li>
+<li style="color: none;">Product Version: 9.1.15.731</li>
+<li style="color: none;">Verify Telerik Reporting Version: True</li>
+<li style="color: none;">Assembly name is null: False</li>
+<li style="color: none;">Assembly : System.Xml</li>
+<li style="color: none;">Assembly Version: </li>
+<li style="color: none;">Product Version: 9.1.15.731</li>
+<li style="color: none;">Verify Telerik Reporting Version: True</li>
+<li style="color: none;">Assembly name is null: False</li>
+<li style="color: none;">Assembly : System.Configuration</li>
+<li style="color: none;">Assembly Version: </li>
+<li style="color: none;">Product Version: 9.1.15.731</li>
+<li style="color: none;">Verify Telerik Reporting Version: True</li>
+<li style="color: none;">Assembly name is null: False</li>
+<li style="color: none;">Assembly : System.Web.Services</li>
+<li style="color: none;">Assembly Version: </li>
+<li style="color: none;">Product Version: 9.1.15.731</li>
+<li style="color: none;">Verify Telerik Reporting Version: True</li>
+<li style="color: none;">Assembly name is null: False</li>
+<li style="color: none;">Assembly : System.EnterpriseServices</li>
+<li style="color: none;">Assembly Version: </li>
+<li style="color: none;">Product Version: 9.1.15.731</li>
+<li style="color: none;">Verify Telerik Reporting Version: True</li>
+<li style="color: none;">Assembly name is null: False</li>
+<li style="color: none;">Assembly : Telerik.Reporting</li>
+<li style="color: none;">Assembly Version: 9.1.15.731</li>
+<li style="color: none;">Product Version: 9.1.15.731</li>
+<li style="color: none;">Verify Telerik Reporting Version: True</li>
+<li style="color: none;">Assembly name is null: False</li>
+<li style="color: none;">Assembly : Telerik.Reporting.Services.WebApi</li>
+<li style="color: none;">Assembly Version: 9.1.15.731</li>
+<li style="color: none;">Product Version: 9.1.15.731</li>
+<li style="color: none;">Verify Telerik Reporting Version: True</li>
+<li style="color: none;">Assembly name is null: False</li>
+<li style="color: none;">Assembly : Telerik.ReportViewer.Html5.WebForms</li>
+<li style="color: none;">Assembly Version: 9.1.15.731</li>
+<li style="color: none;">Product Version: 9.1.15.731</li>
+<li style="color: none;">Verify Telerik Reporting Version: True</li>
+<li style="color: none;">Assembly name is null: False</li>
+<li style="color: none;">Assembly : Telerik.ReportViewer.Mvc</li>
+<li style="color: none;">Assembly Version: 9.1.15.731</li>
+<li style="color: none;">Product Version: 9.1.15.731</li>
+<li style="color: none;">Verify Telerik Reporting Version: True</li>
+<li style="color: none;">Assembly name is null: False</li>
+<li style="color: none;">Assembly : Telerik.ReportViewer.WebForms</li>
+<li style="color: none;">Assembly Version: 9.1.15.731</li>
+<li style="color: none;">Product Version: 9.1.15.731</li>
+<li style="color: none;">Verify Telerik Reporting Version: True</li>
+<li style="color: none;">Assembly name is null: False</li>
+<li style="color: none;">Assembly : WebGrease</li>
+<li style="color: none;">Assembly Version: 1.6.5135.21930</li>
+<li style="color: none;">Product Version: 9.1.15.731</li>
+<li style="color: none;">Verify Telerik Reporting Version: True</li>
+<li style="color: none;">Build Completed</li>
+<li style="color: none;">Check project: ReportTestAppTests</li>
+<li style="color: none;">Get project references.</li>
+<li style="color: none;">Check project: WebApplication1</li>
+<li style="color: none;">Get project references.</li>
+<li style="color: none;">Check project: ReportLibrary2</li>
+<li style="color: none;">Get project references.</li>
+<li style="color: none;">Report Library available: ReportLibrary2</li>
+<li style="color: none;">Initialize available report types.</li>
+<li style="color: none;">Class with name ReportLibrary2.Report2 is found in ReportLibrary2 project.</li>
+<li style="color: none;">Get project references.</li>
+<li style="color: none;">Project reference already available: ReportLibrary2</li>
+<li style="color: none;">Class with name ReportLibrary2.Report2 is found in ReportLibrary2 project.</li>
+<li style="color: none;">Connection Name ReportLibrary2.Properties.Settings.ZMarion</li>
+<li style="color: none;">Connection String Data Source=devServer;Initial Catalog=Z_Marion;User ID=sa;Password=data22</li>
+<li style="color: none;">Connection Type Configuration</li>
+<li style="color: none;">Connection ProviderName System.Data.SqlClient</li>
+<li style="color: none;">Added 'ReportLibrary2.Properties.Settings.ZMarion' connection string to configuration file.</li>
+<li style="color: none;">Cancel the form closing: False</li>
+<li style="color: none;">Add project references</li>
+<li style="color: none;">Reference already available: Telerik.ReportViewer.Mvc, Version=9.1.15.731, Culture=neutral, PublicKeyToken=a9d7983dfcc261be</li>
+<li style="color: none;">Add required references.</li>
+<li style="color: none;">Add project references</li>
+<li style="color: none;">Get project references.</li>
+<li style="color: none;">Reference already available: Telerik.Reporting, Version=9.1.15.731, Culture=neutral, PublicKeyToken=a9d7983dfcc261be</li>
+<li style="color: none;">Reference already available: Telerik.Reporting.Services.WebApi, Culture=neutral, Version=9.1.15.731, PublicKeyToken=a9d7983dfcc261be</li>
+<li style="color: none;">Reference added: Telerik.Reporting.XpsRendering</li>
+<li style="color: none;">Verify Microsoft.AspNet.WebApi.WebHost package references</li>
+<li style="color: none;">Installed NuGet package: Microsoft.AspNet.WebApi.WebHost 4.0.30506</li>
+<li style="color: none;">Verify Microsoft.Web.Infrastructure package references</li>
+<li style="color: none;">Is Microsoft.Web.Infrastructure reference version compatible. Current: 1.0.0.0 | Required 1.0.0.0</li>
+<li style="color: none;">Verify Microsoft.AspNet.WebApi.Core package references</li>
+<li style="color: none;">Is System.Web.Http reference version compatible. Current: 4.0.0.0 | Required 4.0.0.0</li>
+<li style="color: none;">Verify Microsoft.AspNet.WebApi.Client package references</li>
+<li style="color: none;">Is System.Net.Http.Formatting reference version compatible. Current: 4.0.0.0 | Required 4.0.0.0</li>
+<li style="color: none;">Verify Microsoft.Net.Http package references</li>
+<li style="color: none;">Is System.Net.Http reference version compatible. Current: 4.0.0.0 | Required 2.0.0.0</li>
+<li style="color: #FF6600;">Warning: The referenced System.Net.Http assembly version is newer. You should add the following binding redirect:</li>
+<li style="color: none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;dependentAssembly&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;assemblyIdentity name="System.Net.Http" publicKeyToken="31BF3856AD364E35" /&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;bindingRedirect oldVersion="0.0.0.0-4.0.0.0" newVersion="4.0.0.0" /&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/dependentAssembly&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For more information see: <a href = 'http://msdn.microsoft.com/en-us/library/2fc472t2%28v=vs.100%29.aspx'>Assembly Binding Redirection</a> MSDN article</li>
+<li style="color: none;">Is System.Net.Http.WebRequest reference version compatible. Current: 4.0.0.0 | Required 2.0.0.0</li>
+<li style="color: #FF6600;">Warning: The referenced System.Net.Http.WebRequest assembly version is newer. You should add the following binding redirect:</li>
+<li style="color: none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;dependentAssembly&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;assemblyIdentity name="System.Net.Http.WebRequest" publicKeyToken="31BF3856AD364E35" /&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;bindingRedirect oldVersion="0.0.0.0-4.0.0.0" newVersion="4.0.0.0" /&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/dependentAssembly&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For more information see: <a href = 'http://msdn.microsoft.com/en-us/library/2fc472t2%28v=vs.100%29.aspx'>Assembly Binding Redirection</a> MSDN article</li>
+<li style="color: none;">Verify Newtonsoft.Json package references</li>
+<li style="color: none;">Is Newtonsoft.Json reference version compatible. Current: 7.0.0.0 | Required 4.5.0.0</li>
+<li style="color: #FF6600;">Warning: The referenced Newtonsoft.Json assembly version is newer. You should add the following binding redirect:</li>
+<li style="color: none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;dependentAssembly&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;assemblyIdentity name="Newtonsoft.Json" publicKeyToken="30ad4fe6b2a6aeed" /&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;bindingRedirect oldVersion="0.0.0.0-7.0.0.0" newVersion="7.0.0.0" /&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/dependentAssembly&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For more information see: <a href = 'http://msdn.microsoft.com/en-us/library/2fc472t2%28v=vs.100%29.aspx'>Assembly Binding Redirection</a> MSDN article</li>
+<li style="color: none;">Enhance Global.asax: Global.asax.cs</li>
+<li style="color: none;">Namespace Kind: vsCMElementNamespace</li>
+<li style="color: none;">Class Kind: vsCMElementClass</li>
+<li style="color: none;">Class Name MvcApplication</li>
+<li style="color: none;">Class derives from System.Web.HttpApplication</li>
+<li style="color: none;">Function Kind: vsCMElementFunction</li>
+<li style="color: none;">Function name Application_Start</li>
+<li style="color: none;">Function full name ReportTestApp.MvcApplication.Application_Start</li>
+<li style="color: none;">Namespace Kind: vsCMElementNamespace</li>
+<li style="color: none;">Import System.Web.Http is not available</li>
+<li style="color: none;">Namespace Kind: vsCMElementNamespace</li>
+<li style="color: none;">Using System.Web.Http statement successfully added to Global.asax.cs</li>
+<li style="color: none;">Namespace Kind: vsCMElementNamespace</li>
+<li style="color: none;">Import Telerik.Reporting.Services.WebApi is not available</li>
+<li style="color: none;">Namespace Kind: vsCMElementNamespace</li>
+<li style="color: none;">Using Telerik.Reporting.Services.WebApi statement successfully added to Global.asax.cs</li>
+<li style="color: none;">Register routes</li>
+<li style="color: none;">Is REST Report Service route registered: False</li>
+<li style="color: none;">Registered REST Report Service routes in Global.asax</li>
+<li style="color: none;">Class with name ReportsController is not found</li>
+<li style="color: none;">Adding TelerikViewerPage.cshtml.Type project item</li>
+<li style="color: none;">Added ReportViewerView1.cshtml</li>
+<li style="color: none;">Adding TelerikViewerPage.cshtml.Trdx project item</li>
+<li style="color: none;">Adding telerikReportViewer-9.1.15.731.min.js project item</li>
+<li style="color: none;">Added telerikReportViewer-9.1.15.731.min.js</li>
+<li style="color: none;">Adding telerikReportViewer-9.1.15.731.css project item</li>
+<li style="color: none;">Added telerikReportViewer-9.1.15.731.css</li>
+<li style="color: none;">Adding telerikReportViewerTemplate-9.1.15.731.html project item</li>
+<li style="color: none;">Added telerikReportViewerTemplate-9.1.15.731.html</li>
+<li style="color: none;">Adding SampleReport.trdx project item</li>
+<li style="color: none;">Adding ReportsController.cs project item</li>
+<li style="color: none;">Added ReportsController.cs</li>
+
+            </ul>
+        </div>
+    </div>
+
+</body>
+</html>

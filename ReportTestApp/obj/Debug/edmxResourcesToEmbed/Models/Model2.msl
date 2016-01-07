@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Z_JosephineModelStoreContainer" CdmEntityContainer="Z_JosephineEntities">
+    <EntitySetMapping Name="Activities">
+      <EntityTypeMapping TypeName="Z_JosephineModel.Activity">
+        <MappingFragment StoreEntitySet="Activity">
+          <ScalarProperty Name="Activity_Key" ColumnName="Activity_Key" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="NameDesc" ColumnName="NameDesc" />
+          <ScalarProperty Name="DescName" ColumnName="DescName" />
+          <ScalarProperty Name="Perform_Standard" ColumnName="Perform_Standard" />
+          <ScalarProperty Name="Work_Unit" ColumnName="Work_Unit" />
+          <ScalarProperty Name="WorkComp_Key" ColumnName="WorkComp_Key" />
+          <ScalarProperty Name="UOM_Key" ColumnName="UOM_Key" />
+          <ScalarProperty Name="Work_Methods" ColumnName="Work_Methods" />
+          <ScalarProperty Name="Inspection" ColumnName="Inspection" />
+          <ScalarProperty Name="Authorize" ColumnName="Authorize" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="User1" ColumnName="User1" />
+          <ScalarProperty Name="User2" ColumnName="User2" />
+          <ScalarProperty Name="User3" ColumnName="User3" />
+          <ScalarProperty Name="User4" ColumnName="User4" />
+          <ScalarProperty Name="User5" ColumnName="User5" />
+          <ScalarProperty Name="User6" ColumnName="User6" />
+          <ScalarProperty Name="User7" ColumnName="User7" />
+          <ScalarProperty Name="User8" ColumnName="User8" />
+          <ScalarProperty Name="User9" ColumnName="User9" />
+          <ScalarProperty Name="User10" ColumnName="User10" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="DateStamp" ColumnName="DateStamp" />
+          <ScalarProperty Name="SecurityUser_Key" ColumnName="SecurityUser_Key" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

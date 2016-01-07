@@ -1,0 +1,204 @@
+@using Telerik.Reporting
+@using Telerik.ReportViewer.Mvc
+@model string
+@{
+    ViewBag.Title = "Telerik MVC HTML5 Report Viewer";
+}
+
+
+@section styles
+{
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet" />
+
+    <link href="http://cdn.kendostatic.com/2013.2.918/styles/kendo.common.min.css" rel="stylesheet" />
+    <link href="http://cdn.kendostatic.com/2013.2.918/styles/kendo.blueopal.min.css" rel="stylesheet" />
+
+
+    <style>
+        #reportViewer1 {
+            position: absolute;
+            left: 5px;
+            right: 5px;
+            top: 5px;
+            bottom: 5px;
+            overflow: hidden;
+            font-family: Verdana, Arial;
+        }
+    </style>
+
+    <link href="@Url.Content("~/ReportViewer/styles/telerikReportViewer-9.1.15.731.css")" rel="stylesheet" />
+}
+
+
+
+    @(Html.TelerikReporting().ReportViewer()
+        // Each report viewer must have an id - it will be used by the initialization script
+        // to find the element and initialize the report viewer.
+        .Id("reportViewer1")
+        // The URL of the service which will serve reports.
+        // The URL corresponds to the name of the controller class (ReportsController).
+        // For more information on how to configure the service please check http://www.telerik.com/help/reporting/telerik-reporting-rest-conception.html.
+        .ServiceUrl(Url.Content("~/api/reports/"))
+        // The URL for the report viewer template. The template can be edited -
+        // new functionalities can be added and unneeded ones can be removed.
+        // For more information please check http://www.telerik.com/help/reporting/html5-report-viewer-templates.html.
+        .TemplateUrl(Url.Content("~/ReportViewer/templates/telerikReportViewerTemplate-9.1.15.731.html"))
+        // Strongly typed ReportSource - TypeReportSource or UriReportSource.
+        .ReportSource(new TypeReportSource() { TypeName = "ReportLibrary2.Report3, ReportLibrary2, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" })
+        // Specifies whether the viewer is in interactive or print preview mode.
+        // PrintPreview - Displays the paginated report as if it is printed on paper. Interactivity is not enabled.
+        // Interactive - Displays the report in its original width and height with no paging. Additionally interactivity is enabled.
+        .ViewMode(ViewMode.Interactive)
+        // Sets the scale mode of the viewer.
+        // Three modes exist currently:
+        // FitPage - The whole report will fit on the page (will zoom in or out), regardless of its width and height.
+        // FitPageWidth - The report will be zoomed in or out so that the width of the screen and the width of the report match.
+        // Specific - Uses the scale to zoom in and out the report.
+        .ScaleMode(ScaleMode.Specific)
+        // Zoom in and out the report using the scale
+        // 1.0 is equal to 100%, i.e. the original size of the report
+        .Scale(1.0)
+        // Sets whether the viewer’s client session to be persisted between the page’s refreshes(ex. postback).
+        // The session is stored in the browser’s sessionStorage and is available for the duration of the page session.
+        .PersistSession(false)
+        // Sets the print mode of the viewer.
+        .PrintMode(PrintMode.AutoSelect)
+        // Defers the script initialization statement. Check the scripts section below -
+        // each deferred script will be rendered at the place of TelerikReporting().DeferredScripts().
+        .Deferred()
+        .ClientEvents(
+                events => events
+                    .RenderingBegin("onRenderingBegin")
+                    .RenderingEnd("onRenderingEnd")
+                    .PrintBegin("onPrintBegin")
+                    .PrintEnd("onPrintEnd")
+                    .ExportBegin("onExportBegin")
+                    .ExportEnd("onExportBegin")
+                    .UpdateUi("onUpdateUi")
+                    .PageReady("onPageReady")
+                    .Error("onError")
+                    )
+// Uncomment the code below to see the custom parameter editors in action
+//.ParameterEditors(
+//        editors => editors
+//            .SingleSelectEditor("createSingleSelectEditor")
+//            .CustomEditors(new CustomParameterEditor
+//            {
+//                MatchFunction = "customMatch",
+//                CreateEditorFunction = "createCustomEditor"
+//            })
+//)
+    )
+
+
+@section scripts
+{
+	<script src="@Url.Content("~/ReportViewer/js/telerikReportViewer-9.1.15.731.min.js")"></script>
+
+    <!--kendo.all.min.js can be used as well instead of kendo.web.min.js and kendo.mobile.min.js-->
+    <script src="http://cdn.kendostatic.com/2013.2.918/js/kendo.web.min.js"></script>
+    <!--kendo.mobile.min.js - optional, if gestures/touch support is required-->
+    <script src="http://cdn.kendostatic.com/2013.2.918/js/kendo.mobile.min.js"></script>
+
+
+    <script>
+        function onRenderingBegin() {
+            console.log("rendering begin!");
+        }
+        function onRenderingEnd() {
+            console.log("rendering end!");
+        }
+        function onPrintBegin() {
+            console.log("print begin!");
+        }
+        function onPrintEnd() {
+            console.log("print end!");
+        }
+        function onExportBegin() {
+            console.log("export begin!");
+        }
+        function onExportEnd() {
+            console.log("export end!");
+        }
+        function onUpdateUi() {
+            console.log("update ui!");
+        }
+        function onError() {
+            console.log("error!");
+        }
+        function onPageReady() {
+            console.log("page ready!");
+        }
+
+        function createSingleSelectEditor(placeholder, options) {
+            var dropDownElement = $(placeholder).html('<div></div>');
+            var parameter,
+                  valueChangedCallback = options.parameterChanged,
+                  dropDownList;
+
+            function onChange() {
+                var val = dropDownList.value();
+                valueChangedCallback(parameter, val);
+            }
+
+            return {
+                beginEdit: function (param) {
+
+                    parameter = param;
+
+                    $(dropDownElement).kendoDropDownList({
+                        dataTextField: "name",
+                        dataValueField: "value",
+                        value: parameter.value,
+                        dataSource: parameter.availableValues,
+                        change: onChange
+                    });
+
+                    dropDownList = $(dropDownElement).data("kendoDropDownList");
+                }
+            };
+        }
+
+        function customMatch(parameter) {
+            return Boolean(parameter.availableValues)
+                && !parameter.multivalue
+                && parameter.type === telerikReportViewer.ParameterTypes.BOOLEAN;
+        }
+
+        function createCustomEditor(placeholder, options) {
+            var dropDownElement = $(placeholder).html('<div></div>');
+            var parameter,
+                  valueChangedCallback = options.parameterChanged,
+                  dropDownList;
+
+            function onChange() {
+                var val = dropDownList.value();
+                valueChangedCallback(parameter, val);
+            }
+
+            return {
+                beginEdit: function (param) {
+
+                    parameter = param;
+
+                    $(dropDownElement).kendoDropDownList({
+                        dataTextField: "name",
+                        dataValueField: "value",
+                        value: parameter.value,
+                        dataSource: parameter.availableValues,
+                        change: onChange
+                    });
+
+                    dropDownList = $(dropDownElement).data("kendoDropDownList");
+                }
+            };
+        }
+    </script>
+
+    @(
+
+        // All deferred initialization statements will be rendered here
+        Html.TelerikReporting().DeferredScripts()
+    )
+    
+}

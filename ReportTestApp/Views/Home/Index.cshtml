@@ -1,0 +1,663 @@
+﻿@using IrisWeb.Code.Extensions;
+@using IrisWeb.Code.Data.Models.Database;
+@using ReportTestApp.Models;
+@using System.Diagnostics;
+
+@{ 
+    var myModel = new ActivityModel();
+    
+}
+
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" href="styles/kendo.common.min.css" />
+    <link rel="stylesheet" href="styles/kendo.default.min.css" />
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/kendo.all.min.js"></script>
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet" />
+
+    <link href="http://cdn.kendostatic.com/2013.2.918/styles/kendo.common.min.css" rel="stylesheet" />
+    <link href="http://cdn.kendostatic.com/2013.2.918/styles/kendo.blueopal.min.css" rel="stylesheet" />
+    <style>
+        #reportViewer1 {
+            position: absolute;
+            left: 40%;
+            right: 10%;
+            top: 15%;
+            bottom: 5%;
+            overflow: hidden;
+            font-family: Verdana, Arial;
+        }
+    </style>
+
+    <link href="@Url.Content("~/ReportViewer/styles/telerikReportViewer-9.1.15.731.css")" rel="stylesheet" />
+    <script src="@Url.Content("~/ReportViewer/js/telerikReportViewer-9.1.15.731.min.js")"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/kendo.all.min.js"></script>
+    <script type="text/javascript" src="@Url.Content("/Scripts/ListSource.js")"></script>
+</head>
+<body>
+    <div id="example">
+        <div class="k-group k-popup ob-group" id="startDate" style="width:20%">
+            <h4>Start Date</h4>
+            <input data-k-format="'MM/dd/yyyy hh:mm tt'" id="datetimepicker" />  
+        </div>
+        <div class="k-group k-popup ob-group" id="endDate" style="width:20%">
+            <h4>End Date</h4>
+            <input data-k-format="'MM/dd/yyyy hh:mm tt'" id="datetimepicker1" />
+        </div>
+        <div class="column">
+            <h4 class="title">Choose Custom Report Color</h4>
+            <input id="headers" style="width:5%"/>
+            @(Html.Kendo().ColorPicker()
+                .Name("picker")
+                .Value("#ffffff")
+                .Events(events => events.Select("ColorPreview"))
+            )
+        </div>
+
+        <div class="demo-section k-header" style="width:30%">
+            <h4>Select Sort option</h4>
+            <input id="headers2" style="width:20%" /><input id="sorts" />
+        </div>
+            <div class="demo-section k-header" style="width:20%">
+                <h4>Select Group option</h4>
+                <input id="lists" />
+            </div>
+            <div class="k-group k-popup ob-group" id="blog" style="width:15%">
+                <label>
+                    Sort?:
+                    <input id="sortbox" type="checkbox" data-bind="checked: option1" />
+                </label>
+            </div>
+
+            <input id="DataTables" style="width: 20%;" /><br /><button id="refreshTreeData" class="k-button">Refresh Data</button>
+            <button id="clearReportData" class="k-button">Clear Data</button>
+            <button id="loadReportData" class="k-button">Load Data</button>
+            <div class="demo-section k-content" style="width: 25%; height:40em">
+
+                <div id="treeview" style="max-height:39em"></div>
+
+            </div>
+
+            @(Html.TelerikReporting().ReportViewer()
+        // Each report viewer must have an id - it will be used by the initialization script
+        // to find the element and initialize the report viewer.
+        .Id("reportViewer1")
+        // The URL of the service which will serve reports.
+        // The URL corresponds to the name of the controller class (ReportsController).
+        // For more information on how to configure the service please check http://www.telerik.com/help/reporting/telerik-reporting-rest-conception.html.
+        .ServiceUrl(Url.Content("~/api/reports/"))
+        // The URL for the report viewer template. The template can be edited -
+        // new functionalities can be added and unneeded ones can be removed.
+        // For more information please check http://www.telerik.com/help/reporting/html5-report-viewer-templates.html.
+        .TemplateUrl(Url.Content("~/ReportViewer/templates/telerikReportViewerTemplate-9.1.15.731.html"))
+        // Strongly typed ReportSource - TypeReportSource or UriReportSource.
+        .ReportSource(new TypeReportSource() { TypeName = "ReportLibrary2.Report3, ReportLibrary2, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" })
+        // Specifies whether the viewer is in interactive or print preview mode.
+        // PrintPreview - Displays the paginated report as if it is printed on paper. Interactivity is not enabled.
+        // Interactive - Displays the report in its original width and height with no paging. Additionally interactivity is enabled.
+        .ViewMode(ViewMode.Interactive)
+        // Sets the scale mode of the viewer.
+        // Three modes exist currently:
+        // FitPage - The whole report will fit on the page (will zoom in or out), regardless of its width and height.
+        // FitPageWidth - The report will be zoomed in or out so that the width of the screen and the width of the report match.
+        // Specific - Uses the scale to zoom in and out the report.
+        .ScaleMode(ScaleMode.Specific)
+        // Zoom in and out the report using the scale
+        // 1.0 is equal to 100%, i.e. the original size of the report
+        .Scale(1.0)
+        // Sets whether the viewer’s client session to be persisted between the page’s refreshes(ex. postback).
+        // The session is stored in the browser’s sessionStorage and is available for the duration of the page session.
+        .PersistSession(false)
+        // Sets the print mode of the viewer.
+        .PrintMode(PrintMode.AutoSelect)
+        // Defers the script initialization statement. Check the scripts section below -
+        // each deferred script will be rendered at the place of TelerikReporting().DeferredScripts().
+        .Deferred()
+        .ClientEvents(
+                events => events
+                    .RenderingBegin("onRenderingBegin")
+                    .RenderingEnd("onRenderingEnd")
+                    .PrintBegin("onPrintBegin")
+                    .PrintEnd("onPrintEnd")
+                    .ExportBegin("onExportBegin")
+                    .ExportEnd("onExportBegin")
+                    .UpdateUi("onUpdateUi")
+                    .PageReady("onPageReady")
+                    .Error("onError")
+                    )
+           
+            )
+
+            <script>
+                var data2 = null;
+                var myData;
+                var myKeys = [];
+                var sortable = [];
+                var allData;
+                var activitySet = activity();
+                var dropdownlist;
+                var myTree;
+                var element = $("#treeview");
+                var treeview = element.data("kendoTreeView");
+                var hierarchialEntities;
+                var reportViewer;
+                var dropdownlistCounty;
+                var dropdownlistsort;
+                var dropdownlistsort2;
+                var datetimepicker;
+                var datetimepicker1;
+                var headerList;
+                var headerList2;
+                var headerVal;
+
+
+                function ColorPreview(e) {
+                    //do something later!
+                    $.ajax({
+                        type: "post",
+                        url: '@Url.Action("SetStyles", "Home")',
+                        data: { 'R': hexToRgb(e.value).r, 'G': hexToRgb(e.value).g, 'B': hexToRgb(e.value).b, 'header': parseInt(headerList.value()) },
+                        success: function (data) {
+                            console.log(data);
+                            reportViewer = $("#reportViewer1").data("telerik_ReportViewer");
+                            reportViewer.refreshReport();
+                        }
+                    });
+                    //$("#background").css("background-color", e.value);
+                }
+
+                function hexToRgb(hex) {
+                    // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
+                    var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+                    hex = hex.replace(shorthandRegex, function (m, r, g, b) {
+                        return r + r + g + g + b + b;
+                    });
+
+                    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+                    return result ? {
+                        r: parseInt(result[1], 16),
+                        g: parseInt(result[2], 16),
+                        b: parseInt(result[3], 16)
+                    } : null;
+                }
+
+
+                function SetSortOptions(e) {
+                    //do something later!
+                    //alert("YOYOY");
+                    $.ajax({
+                        type: "post",
+                        url: '@Url.Action("SetRealSort", "Home")',
+                        data: { 'header': headerList2.value(), 'sortOption': escape(dropdownlistsort2.value()) },
+                        success: function (data) {
+                            console.log(data);
+                            reportViewer = $("#reportViewer1").data("telerik_ReportViewer");
+                            reportViewer.refreshReport();
+                        }
+                    });
+                    //$("#background").css("background-color", e.value);
+                }
+
+
+                $(document).ready(function () {
+                    headerVal = [
+                        { text: "0", value: 0 },
+                        { text: "1", value: 1 },
+                        { text: "2", value: 2 },
+                        { text: "3", value: 3 },
+                        { text: "4", value: 4 },
+                        { text: "5", value: 5 }
+                    ];
+
+
+                    $("#DataTables").kendoDropDownList({
+                        dataTextField: "text",
+                        dataValueField: "value",
+                        dataSource: DropDownSet(),
+                        height: 100
+                    })
+                                          .closest(".k-widget")
+                                          .attr("id", "products_wrapper");
+
+
+                    dropdownlist = $("#DataTables").data("kendoDropDownList"),
+                                setValue = function (e) {
+                                    if (e.type != "keypress" || kendo.keys.ENTER == e.keyCode)
+                                        dropdownlist.value($("#value").val());
+
+                                };
+
+                    $("#value").keypress(setValue);
+
+                    $.ajax({
+                        dataType: "json",
+                        url: '@Url.Action("GetStuff", "Home")',
+                        data: { 'myTable': "Activity" }
+                    });
+
+                    $.ajax({
+                        dataType: "json",
+                        url: '@Url.Action("TestDataSet", "Home")',
+                        data: { 'tree': "Activity" },
+                        success: function (data) {
+                            traverse(JSON.parse(data), process);
+                            if (!treeview) {
+                                treeview = element.kendoTreeView({
+                                    dragAndDrop: true,
+                                    check: onCheck,
+                                    dragend: onCheck,
+                                    checkboxes: {
+                                        checkChildren: true
+                                    },
+                                    height: 100
+                                }).data("kendoTreeView");
+                            }
+                            treeview.setDataSource(JSON.parse(data));
+                            dropdownlistsort.setDataSource(JSON.parse(data)[0].items);
+                            dropdownlistsort2.setDataSource(JSON.parse(data)[0].items);
+                        }
+                    });
+
+                    data2 = kendo.observable({
+                        option1: true
+                    });
+                    kendo.bind($("#blog"), data2);
+
+                    $("#lists").kendoDropDownList({
+                        dataTextField: "text",
+                        dataValueField: "id",
+                        //dataSource: sortable,
+                        change: onChange,
+                        height: 100
+                    })
+                                      .closest(".k-widget")
+                                      .attr("id", "products_wrapper");
+
+                    $("#sorts").kendoDropDownList({
+                        dataTextField: "text",
+                        dataValueField: "id",
+                        //dataSource: sortable,
+                        change: SetSortOptions,
+                        height: 100
+                    })
+                                      .closest(".k-widget")
+                                      .attr("id", "products_wrapper");
+
+                    $("#headers").kendoDropDownList({
+                        dataTextField: "text",
+                        dataValueField: "id",
+                        dataSource: headerVal,
+                        height: 100
+                    })
+                                      .closest(".k-widget")
+                                      .attr("id", "products_wrapper");
+
+                    $("#headers2").kendoDropDownList({
+                        dataTextField: "text",
+                        dataValueField: "id",
+                        dataSource: headerVal,
+                        height: 100
+                    })
+                                      .closest(".k-widget")
+                                      .attr("id", "products_wrapper");
+
+
+
+
+                    headerList = $("#headers").data("kendoDropDownList"),
+                                sethValue = function (e) {
+                                    if (e.type != "keypress" || kendo.keys.ENTER == e.keyCode)
+                                        headerList.value($("#hvalue").val());
+
+                                };
+
+                    $("#hvalue").keypress(sethValue);
+
+                    headerList2 = $("#headers2").data("kendoDropDownList"),
+                                sethValue = function (e) {
+                                    if (e.type != "keypress" || kendo.keys.ENTER == e.keyCode)
+                                        headerList2.value($("#hvalue2").val());
+
+                                };
+
+                    $("#hvalue2").keypress(sethValue);
+
+                    dropdownlistsort = $("#lists").data("kendoDropDownList"),
+                            setValue = function (e) {
+                                if (e.type != "keypress" || kendo.keys.ENTER == e.keyCode)
+                                    dropdownlist.value($("#value").val());
+                            };
+
+                    dropdownlistsort2 = $("#sorts").data("kendoDropDownList"),
+                            setValue = function (e) {
+                                if (e.type != "keypress" || kendo.keys.ENTER == e.keyCode)
+                                    dropdownlist.value($("#value").val());
+                            };
+
+
+                    $("#datetimepicker").kendoDatePicker({
+                        change: OnDateChange
+                    })
+                                           .closest(".k-widget")
+                                           .attr("id", "datetimepicker_wrapper");
+                    datetimepicker = $("#datetimepicker").data("kendoDatePicker");
+
+                    $("#datetimepicker1").kendoDatePicker({
+                        change: OnDateChange
+                    })
+                                    .closest(".k-widget")
+                                    .attr("id", "datetimepicker_wrapper");
+                    datetimepicker1 = $("#datetimepicker1").data("kendoDatePicker");
+
+                    function formatDate(date) {
+                        return date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear();
+                    }
+
+                    function OnDateChange(e) {
+                        if (datetimepicker.value() == null) {
+                            alert("Please enter a Start Date");
+                        } else if (datetimepicker1.value() != null) {
+                            //alert("Start Date: " + formatDate(datetimepicker.value()) + " End Date: " + formatDate(datetimepicker1.value()));
+                            $.ajax({
+                                url: '@Url.Action("DateFilter", "Home")',
+                                type: "post",
+                                data: { 'myStartDate': formatDate(datetimepicker.value()), 'myEndDate': formatDate(datetimepicker1.value()) },
+                                success: function (data) {
+                                    // alert("sup dude "+data);
+                                },
+                                error: function () {
+                                    // alert("denied!");
+                                },
+                                complete: function () {
+                                    //  alert("we done");
+                                }
+                            });
+                            reportViewer = $("#reportViewer1").data("telerik_ReportViewer");
+                            reportViewer.refreshReport();
+                            //onCheck();
+                        }
+                    }
+
+
+                    function onChange(e) {
+                        //alert("NO");
+                        $.ajax({
+                            url: '@Url.Action("SetSort", "Home")',
+                            type: "post",
+                            data: { 'sortOption': escape(dropdownlistsort.value()) },
+                            success: function (data) {
+                                // alert("sup dude "+data);
+                            },
+                            error: function () {
+                                // alert("denied!");
+                            },
+                            complete: function () {
+                                //  alert("we done");
+                            }
+                        });
+                        //onCheck();
+                    };
+                });
+
+                $("#loadReportData").click(function () {
+                    $.ajax({
+                        type: "post",
+                        dataType: "json",
+                        url: '@Url.Action("GetReport", "Home")',
+                        success: function (data){
+
+                        },
+                        error: function () {
+                           // alert("failed");
+                        }
+                    });
+                    reportViewer = $("#reportViewer1").data("telerik_ReportViewer");
+                            reportViewer.refreshReport();
+                });
+
+
+                $("#clearReportData").click(function () {
+                    $.ajax({
+                        dataType: "json",
+                        url: '@Url.Action("ClearData", "Home")'
+                    });
+                    reportViewer = $("#reportViewer1").data("telerik_ReportViewer");
+                    reportViewer.refreshReport();
+                });
+
+
+
+                $("#refreshTreeData").click(function () {
+                    $.ajax({
+                        dataType: "json",
+                        url: '@Url.Action("TestDataSet", "Home")',
+                        data: { 'tree': escape(dropdownlist.value()) },
+                        success: function (data) {
+                            traverse(JSON.parse(data), process);
+                            if (!treeview) {
+                                treeview = element.kendoTreeView({
+                                    dragAndDrop: true,
+                                    check: onCheck,
+                                    dragend: onCheck,
+                                    checkboxes: {
+                                        checkChildren: true
+                                    },
+                                    height: 100
+                                }).data("kendoTreeView");
+                            }
+                            treeview.setDataSource(JSON.parse(data));
+                            dropdownlistsort.setDataSource(JSON.parse(data)[0].items);
+                            dropdownlistsort2.setDataSource(JSON.parse(data)[0].items);
+                        }
+                    });
+                });
+
+                function ParseCols(obj) {
+                    var cols = new Array();
+                    var p = obj[0];
+                    for (var key in p) {
+                        cols.push(key);
+                    }
+                    return cols;
+                }
+
+                function process(key, value) {
+                    console.log(key + " : " + value);
+                    var contains = false;
+                    if (myKeys.length > 0) {
+                        for (i = 0; i < myKeys.length; i++) {
+                            if (key == myKeys[i]) {
+                                contains = true;
+                            }
+                        }
+                    }
+                    if (contains == false) {
+                        if (key == "id" && value != "*") {
+                            console.log("pushing : " + value);
+                            myKeys.push(String(value));
+                        }
+                    }
+
+                    console.log(myKeys.length);
+                }
+
+                function traverse(o, func) {
+                    for (var i in o) {
+                        func.apply(this, [i, o[i]]);
+                        if (o[i] !== null && typeof (o[i]) == "object") {
+                            traverse(o[i], func);
+                        }
+                    }
+                }
+
+
+                function checkedNodeIds(nodes, checkedNodes, checkedNodesText) {
+                    for (var i = 0; i < nodes.length; i++) {
+                        if (nodes[i].checked) {
+                            checkedNodes.push(nodes[i].id);
+                            checkedNodesText.push(nodes[i].text);
+                            if (nodes[i].id == "*") {
+                                treeview.expand(".k-item");
+                            }
+                        }
+
+                        if (nodes[i].hasChildren) {
+                            checkedNodeIds(nodes[i].children.view(), checkedNodes, checkedNodesText);
+                        }
+                    }
+                }
+
+                // show checked node IDs on datasource change
+                function onCheck() {
+                    var sLength = sortable.length;
+                    for (i = 0; i < sLength; i++) {
+                        sortable.pop();
+                    }
+                    var checkedNodes = [],
+                        checkedNodesText = [],
+                        treeView = $("#treeview").data("kendoTreeView"),
+                        message;
+
+                    checkedNodeIds(treeView.dataSource.view(), checkedNodes, checkedNodesText);
+                    console.log(checkedNodesText);
+                    sortable = checkedNodesText;
+                    callReport(checkedNodes,checkedNodesText);
+                }
+
+
+                function callReport(list,listName) {
+                    $.ajax({
+                        url: '@Url.Action("SetupReport", "Home")',
+                        type: "get",
+                        data: { 'table': escape(dropdownlist.value()), 'dataFields': JSON.stringify(list), 'dataFieldNames': JSON.stringify(listName), 'id': 0, 'county': "Wallawa" },
+                        success: function (data) {
+                            //  alert("sup dude");
+                        },
+                        error: function () {
+                            // alert("denied!");
+                        },
+                        complete: function () {
+                            //  alert("we done");
+                            reportViewer = $("#reportViewer1").data("telerik_ReportViewer");
+                            reportViewer.refreshReport();
+                           // dropdownlistsort.setDataSource(JSON.parse(sortable));
+                        }
+                    });
+
+                }
+
+
+
+                function onRenderingBegin() {
+                    console.log("rendering begin!");
+                }
+                function onRenderingEnd() {
+                    console.log("rendering end!");
+                }
+                function onPrintBegin() {
+                    console.log("print begin!");
+                }
+                function onPrintEnd() {
+                    console.log("print end!");
+                }
+                function onExportBegin() {
+                    console.log("export begin!");
+                }
+                function onExportEnd() {
+                    console.log("export end!");
+                }
+                function onUpdateUi() {
+                    console.log("update ui!");
+                }
+                function onError() {
+                    console.log("error!");
+                }
+                function onPageReady() {
+                    console.log("page ready!");
+                }
+
+                function createSingleSelectEditor(placeholder, options) {
+                    var dropDownElement = $(placeholder).html('<div></div>');
+                    var parameter,
+                          valueChangedCallback = options.parameterChanged,
+                          dropDownList;
+
+                    function onChange() {
+                        var val = dropDownList.value();
+                        valueChangedCallback(parameter, val);
+                    }
+
+                    return {
+                        beginEdit: function (param) {
+
+                            parameter = param;
+
+                            $(dropDownElement).kendoDropDownList({
+                                dataTextField: "name",
+                                dataValueField: "value",
+                                value: parameter.value,
+                                dataSource: parameter.availableValues,
+                                change: onChange
+                            });
+
+                            dropDownList = $(dropDownElement).data("kendoDropDownList");
+                        }
+                    };
+                }
+
+                function customMatch(parameter) {
+                    return Boolean(parameter.availableValues)
+                        && !parameter.multivalue
+                        && parameter.type === telerikReportViewer.ParameterTypes.BOOLEAN;
+                }
+
+                function createCustomEditor(placeholder, options) {
+                    var dropDownElement = $(placeholder).html('<div></div>');
+                    var parameter,
+                          valueChangedCallback = options.parameterChanged,
+                          dropDownList;
+
+                    function onChange() {
+                        var val = dropDownList.value();
+                        valueChangedCallback(parameter, val);
+                    }
+
+                    return {
+                        beginEdit: function (param) {
+
+                            parameter = param;
+
+                            $(dropDownElement).kendoDropDownList({
+                                dataTextField: "name",
+                                dataValueField: "value",
+                                value: parameter.value,
+                                dataSource: parameter.availableValues,
+                                change: onChange
+                            });
+
+                            dropDownList = $(dropDownElement).data("kendoDropDownList");
+                        }
+                    };
+                }
+            </script>
+            @(
+
+        // All deferred initialization statements will be rendered here
+        Html.TelerikReporting().DeferredScripts()
+            )
+            <style>
+                .configuration .k-textbox {
+                    width: 40px;
+                }
+
+                .k-button {
+                    min-width: 80px;
+                }
+            </style>
+        </div>
+</body>
+</html>

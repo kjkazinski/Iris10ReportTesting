@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Z_JosephineModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Activity">
+    <Key>
+      <PropertyRef Name="Activity_Key" />
+    </Key>
+    <Property Name="Activity_Key" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="NameDesc" Type="String" MaxLength="63" FixedLength="false" Unicode="false" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+    <Property Name="DescName" Type="String" MaxLength="63" FixedLength="false" Unicode="false" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+    <Property Name="Perform_Standard" Type="Decimal" Precision="13" Scale="4" />
+    <Property Name="Work_Unit" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="WorkComp_Key" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="UOM_Key" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="Work_Methods" Type="String" MaxLength="2048" FixedLength="false" Unicode="false" />
+    <Property Name="Inspection" Type="String" MaxLength="2048" FixedLength="false" Unicode="false" />
+    <Property Name="Authorize" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="Active" Type="Byte" Nullable="false" />
+    <Property Name="User1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="User2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="User3" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="User4" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="User5" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="User6" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="User7" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="User8" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="User9" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="User10" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="CreateDate" Type="DateTime" Precision="7" />
+    <Property Name="DateStamp" Type="DateTime" Precision="7" />
+    <Property Name="SecurityUser_Key" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="Z_JosephineEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Activities" EntityType="Self.Activity" />
+  </EntityContainer>
+</Schema>
