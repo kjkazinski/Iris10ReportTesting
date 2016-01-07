@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportLibrary2", "ReportLibrary2\ReportLibrary2.csproj", "{F687EDB6-E1D4-4E0D-A9A8-0B17B8B929BC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsFormsApplication1", "WindowsFormsApplication1\WindowsFormsApplication1.csproj", "{3C069C81-CFE5-4D18-A640-0BBDB0E3CAFC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F687EDB6-E1D4-4E0D-A9A8-0B17B8B929BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F687EDB6-E1D4-4E0D-A9A8-0B17B8B929BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F687EDB6-E1D4-4E0D-A9A8-0B17B8B929BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F687EDB6-E1D4-4E0D-A9A8-0B17B8B929BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C069C81-CFE5-4D18-A640-0BBDB0E3CAFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C069C81-CFE5-4D18-A640-0BBDB0E3CAFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C069C81-CFE5-4D18-A640-0BBDB0E3CAFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C069C81-CFE5-4D18-A640-0BBDB0E3CAFC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
