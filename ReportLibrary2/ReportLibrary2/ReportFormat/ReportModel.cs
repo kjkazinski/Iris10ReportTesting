@@ -19,6 +19,7 @@ namespace ReportFormat.Model
             GroupBy = jUser["GroupBy"].ToArray();
             GenerateTitleField = jUser["GenerateTitleField"].ToArray();
             GenerateDataField = jUser["GenerateDataField"].ToArray();
+            Filters = jUser["Filters"].ToArray();
         }
 
 
@@ -41,17 +42,17 @@ namespace ReportFormat.Model
         //recieve data field, annotations define function
         public Array GroupBy { get; set; }
 
-        public List<string> AddSortings { get; set; }
+        public Array AddSortings { get; set; }
 
         public Array GenerateTitleField { get; set; }
 
         public Array GenerateDataField { get; set; }
 
-        public List<string> SumOrCount { get; set; }
+        public Array SumOrCount { get; set; }
 
-        public List<int> ChangeBandColor { get; set; }
+        public Array ChangeBandColor { get; set; }
 
-        public List<string> Filters { get; set; }
+        public Array Filters { get; set; }
 
         public string AddReportFooterSection { get; set; }
         public string AddPageNumbers { get; set; }

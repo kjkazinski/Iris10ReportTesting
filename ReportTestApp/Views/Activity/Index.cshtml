@@ -132,6 +132,7 @@
         var fields = [];
         var fieldsDisplay = [];
         var groups = [];
+        var filters = [];
         for (var k = 0; k < test.dataSource.options.fields.length; k++) {
             if (test.dataSource.options.fields[k].hidden != true && test.dataSource.options.fields[k].title != "Edit") {
                 fields.push(test.dataSource.options.fields[k].field);
@@ -143,14 +144,19 @@
                 groups.push(test.dataSource.group()[k].field);
             }
         }
-        alert(fields.length);
+        if (test.dataSource.filter().length != 0) {
+            for (var i = 0; i < test.dataSource.filter().filters.length; i++) {
+                filters.push(test.dataSource.filter().filters[i]);
+            }
+        }
+        alert("filters: "+filters.length);
         //alert("This is the first column data source: " + test.dataSource.options.fields[1].field+
         //"\nThis is the first group: " + test.dataSource.group()[0].field+
         //"\nThis is the sort direction: " + test.dataSource.group()[0].dir);
         $.ajax({
             type: "get",
             url: '@Url.Action("GetGridData", "Activity")', //'columnData': JSON.stringify(test.dataSource.options.fields)
-            data: { 'columnData': JSON.stringify(fields), 'columnName':JSON.stringify(fieldsDisplay), 'groupData': JSON.stringify(groups) },
+            data: { 'columnData': JSON.stringify(fields), 'columnName':JSON.stringify(fieldsDisplay), 'groupData': JSON.stringify(groups), 'filterData': JSON.stringify(filters) },
             success: function (data) {
                 alert(data);
                 window.location.href = '@Url.Action("ReportViewerView1", "Home")';

@@ -66,19 +66,21 @@ namespace ReportTestApp.Controllers
         }
 
         [HttpGet]
-        public string GetGridData(string columnData,string columnName, string groupData)
+        public string GetGridData(string columnData,string columnName, string groupData, string filterData)
         {
-            Debug.WriteLine("YO: "+columnData+" | "+groupData);
-            
+            // Debug.WriteLine("YO: "+columnData+" | "+groupData);
+           // Debug.WriteLine("Filter: "+filterData);
             var columns = StringHelper(columnData);
             var columnNames = StringHelper(columnName);
             var groups = StringHelper(groupData);
+            var filters = FilterHelper(filterData);
             ReportObject.ReportName = "Test Report";
             ReportObject.ConnectionString = "Initial Catalog=A_Wallowa9;Data Source=10.0.0.40;User ID=developer;Password=aociris;";
             ReportObject.SelectCommand = "SELECT * FROM Activity";
             ReportObject.GenerateDataField = columns.ToList();
             ReportObject.GenerateTitleField = columnNames.ToList();
             ReportObject.GroupBy = groups.ToList();
+            ReportObject.Filters = filters.ToList();
             dynamic collectionWrapper = new
             {
 
@@ -96,11 +98,11 @@ namespace ReportTestApp.Controllers
 
         private string[] StringHelper(string obj)
         {
-            var arrayNULL = new string[0];
+            var arrayNull = new string[0];
             if (obj.Length > 2)
             {
                 obj = obj.Substring(1, obj.Length - 2);
-                Debug.WriteLine("First Pass: " + obj);
+               // Debug.WriteLine("First Pass: " + obj);
                 var array = obj.Split(',');
                 for (int k = 0; k < array.Length; k++)
                 {
@@ -109,8 +111,29 @@ namespace ReportTestApp.Controllers
                 return array;
             }
 
-            return arrayNULL;
+            return arrayNull;
         }
+
+        private string[] FilterHelper(string obj)
+        {
+            var arrayNull = new string[0];
+            if(obj.Length > 2)
+            {
+                obj = obj.Substring(1, obj.Length - 2);
+                var array = obj.Split(',');
+                var fullFilter = new string[array.Length/3];
+                var count = 0;
+                for (int i = 0; i < array.Length; i+=3)
+                {
+                    fullFilter[count] = array[i] + "|"+array[i + 1] + "|"+array[i + 2];
+                    count++;
+                }
+               // Debug.WriteLine(fullFilter[0]);
+                return fullFilter;
+            }
+            return arrayNull;
+        }
+
 
 
     }
