@@ -14,3 +14,19 @@ C:\Users\temer\Documents\Visual Studio 2015\Projects\ReportLibrary2\ReportLibrar
 C:\Users\temer\Documents\Visual Studio 2015\Projects\ReportLibrary2\ReportLibrary2\obj\Debug\ReportLibrary2.dll.licenses
 C:\Users\temer\Documents\Visual Studio 2015\Projects\ReportLibrary2\ReportLibrary2\obj\Debug\ReportLibrary2.dll
 C:\Users\temer\Documents\Visual Studio 2015\Projects\ReportLibrary2\ReportLibrary2\obj\Debug\ReportLibrary2.pdb
+C:\Users\temer\Documents\GitHub\Iris10ReportTesting\ReportLibrary2\ReportLibrary2\bin\Debug\ReportLibrary2.dll.config
+C:\Users\temer\Documents\GitHub\Iris10ReportTesting\ReportLibrary2\ReportLibrary2\bin\Debug\ReportLibrary2.dll
+C:\Users\temer\Documents\GitHub\Iris10ReportTesting\ReportLibrary2\ReportLibrary2\bin\Debug\ReportLibrary2.pdb
+C:\Users\temer\Documents\GitHub\Iris10ReportTesting\ReportLibrary2\ReportLibrary2\bin\Debug\Newtonsoft.Json.dll
+C:\Users\temer\Documents\GitHub\Iris10ReportTesting\ReportLibrary2\ReportLibrary2\bin\Debug\Telerik.Reporting.dll
+C:\Users\temer\Documents\GitHub\Iris10ReportTesting\ReportLibrary2\ReportLibrary2\bin\Debug\Newtonsoft.Json.xml
+C:\Users\temer\Documents\GitHub\Iris10ReportTesting\ReportLibrary2\ReportLibrary2\bin\Debug\Telerik.Reporting.pdb
+C:\Users\temer\Documents\GitHub\Iris10ReportTesting\ReportLibrary2\ReportLibrary2\bin\Debug\Telerik.Reporting.xml
+C:\Users\temer\Documents\GitHub\Iris10ReportTesting\ReportLibrary2\ReportLibrary2\obj\Debug\ReportLibrary2.csprojResolveAssemblyReference.cache
+C:\Users\temer\Documents\GitHub\Iris10ReportTesting\ReportLibrary2\ReportLibrary2\obj\Debug\ReportLibrary2.Report1.resources
+C:\Users\temer\Documents\GitHub\Iris10ReportTesting\ReportLibrary2\ReportLibrary2\obj\Debug\ReportLibrary2.Report2.resources
+C:\Users\temer\Documents\GitHub\Iris10ReportTesting\ReportLibrary2\ReportLibrary2\obj\Debug\ReportLibrary2.Report3.resources
+C:\Users\temer\Documents\GitHub\Iris10ReportTesting\ReportLibrary2\ReportLibrary2\obj\Debug\ReportLibrary2.csproj.GenerateResource.Cache
+C:\Users\temer\Documents\GitHub\Iris10ReportTesting\ReportLibrary2\ReportLibrary2\obj\Debug\ReportLibrary2.dll.licenses
+C:\Users\temer\Documents\GitHub\Iris10ReportTesting\ReportLibrary2\ReportLibrary2\obj\Debug\ReportLibrary2.dll
+C:\Users\temer\Documents\GitHub\Iris10ReportTesting\ReportLibrary2\ReportLibrary2\obj\Debug\ReportLibrary2.pdb

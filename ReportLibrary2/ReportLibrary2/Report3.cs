@@ -81,6 +81,11 @@ namespace ReportLibrary2
             {
                 GroupBy(data.GroupBy.GetValue(a).ToString(), "=Fields." + data.GroupBy.GetValue(a).ToString());
             }
+            for (int i = 0; i < data.Filters.Length; i++)
+            {
+                Debug.WriteLine("filter stuff: " + data.Filters.GetValue(i));
+            }
+
             ChangeSqlString(data.ConnectionString);
             SQLCommandString = data.SelectCommand;
         }
