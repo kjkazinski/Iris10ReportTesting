@@ -128,7 +128,7 @@ namespace ReportTestApp.Controllers
                     fullFilter[count] = array[i] + "|"+array[i + 1] + "|"+array[i + 2];
                     count++;
                 }
-               // Debug.WriteLine(fullFilter[0]);
+                Debug.WriteLine(fullFilter[0]);
                 return fullFilter;
             }
             return arrayNull;

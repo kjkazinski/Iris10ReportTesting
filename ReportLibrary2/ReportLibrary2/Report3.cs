@@ -55,6 +55,8 @@ namespace ReportLibrary2
         public static int ColorR = 121;
         public static int ColorG = 167;
         public static int ColorB = 227;
+        public static Filter[] MyFilters = new Filter[50];
+        public static int FilterCount = 0;
 
 
         public Report3()
@@ -66,6 +68,10 @@ namespace ReportLibrary2
             //
             // TODO: Add any constructor code after InitializeComponent call
             //
+            for (int i = 0; i < FilterCount; i++)
+            {
+                Report.Filters.Add(MyFilters[i]);
+            }
         }
 
         public static void GetJSON(string json)
@@ -83,16 +89,88 @@ namespace ReportLibrary2
             }
             for (int i = 0; i < data.Filters.Length; i++)
             {
-                Debug.WriteLine("filter stuff: " + data.Filters.GetValue(i));
+                CreateFilterOption(data.Filters.GetValue(i).ToString());
             }
 
             ChangeSqlString(data.ConnectionString);
             SQLCommandString = data.SelectCommand;
         }
 
-        public static void TestFunction(List<string> myModel)
+        public static void CreateFilterOption(string obj)
         {
-            Debug.WriteLine("This is sparta! " + myModel[0] + " " + myModel[0]);
+            //var field = "";
+            //var operand = "";
+            //var val = "";
+            obj = obj.Replace('|', ',');
+            Dictionary<string, string> values = JsonConvert.DeserializeObject<Dictionary<string, string>>(obj);
+            Filter reportFilter = new Filter("=Fields."+values["field"],GetOper(values["operator"]), FixValue(values["operator"],values["value"]));
+            //Filter Test
+            // Filter reportFilter = new Filter("=Fields.Name", FilterOperator.LessThan, "10");
+            //Report.Filters.Add(reportFilter);
+            // Filter groupFilter = new Filter("=Fields.Description", FilterOperator.NotLike, "%C");
+            // Report.Filters.Add(groupFilter);
+            // Filter dateFilter1 = new Filter("=Fields.DateStamp", FilterOperator.GreaterOrEqual, "=parameters.StartDate.Value");
+            // Report.Filters.Add(dateFilter1);
+            // Filter dateFilter2 = new Filter("=Fields.DateStamp", FilterOperator.LessOrEqual, "=parameters.EndDate.Value");
+            MyFilters[FilterCount] = reportFilter;
+            FilterCount++;
+
+
+            
+            Debug.WriteLine("obj1: " + values["field"]);
+        }
+        
+        private static FilterOperator GetOper(string op)
+        {
+            switch (op)
+            {
+                case "contains":
+                    return FilterOperator.Like;
+                case "endswith":
+                    return FilterOperator.Like;
+                case "eq":
+                    return FilterOperator.Equal;
+                case "neq":
+                    return FilterOperator.NotEqual;
+                case "startswith":
+                    return FilterOperator.Like;
+                case "doesnotcontain":
+                    return FilterOperator.NotLike;
+                case "lte":
+                    return FilterOperator.LessOrEqual;
+                case "lt":
+                    return FilterOperator.LessThan;
+                case "gte":
+                    return FilterOperator.GreaterOrEqual;
+                case "gt":
+                    return FilterOperator.GreaterThan;
+                
+            }
+            return FilterOperator.Equal;
+        }
+
+        private static string FixValue(string op,string val)
+        {
+            if(op == "contains")
+            {
+                return "%" + val + "%";
+            }
+            else if(op == "doesnotcontain")
+            {
+                return "%" + val + "%";
+            }
+            else if(op == "endswith")
+            {
+                return "%" + val;
+            }
+            else if (op == "startswith")
+            {
+                return val+"%";
+            }
+            else
+            {
+                return val;
+            }
         }
 
         public static void AddDateFilter(string start,string end)
