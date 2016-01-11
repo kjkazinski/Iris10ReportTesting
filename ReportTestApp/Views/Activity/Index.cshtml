@@ -144,9 +144,12 @@
                 groups.push(test.dataSource.group()[k].field);
             }
         }
-        if (test.dataSource.filter().length != 0) {
-            for (var i = 0; i < test.dataSource.filter().filters.length; i++) {
-                filters.push(test.dataSource.filter().filters[i]);
+        if (test.dataSource.filter() != undefined) {
+            alert("filter: " + test.dataSource.filter());
+            if (test.dataSource.filter().length != 0) {
+                for (var i = 0; i < test.dataSource.filter().filters.length; i++) {
+                    filters.push(test.dataSource.filter().filters[i]);
+                }
             }
         }
         alert("filters: "+filters.length);
