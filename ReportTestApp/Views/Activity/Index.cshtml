@@ -82,7 +82,7 @@
             .Aggregates(aggregates =>
                    {
                        //aggregates.Add(p => p.Bill_Rate).Sum();
-                       //aggregates.Add(p => p.Employee_Rate).Average();
+                       aggregates.Add(p => p.Description).Count();
                        aggregates.Add(p => p.UOM_Key).Count();
                    })
             .ServerOperation(false)
@@ -107,7 +107,7 @@
                 //.Format("{0:c}").ClientFooterTemplate("Average: #=kendo.format('{0:c}', average)#").ClientGroupFooterTemplate("Sub average: #=kendo.format('{0:c}', average)#");
                 columns.Bound(p => p.Activity_Key).Title("Activity Key");
                 columns.Bound(p => p.DateStamp).Title("Date");
-                columns.Bound(p => p.Description).Title("Description").Width("300px");
+                columns.Bound(p => p.Description).Title("Description").Width("300px").ClientFooterTemplate("Count: #=kendo.format('{0}', count)#").ClientGroupFooterTemplate("Sub Count: #=kendo.format('{0}', count)#");
                 columns.Bound(p => p.UOM_Key).Title("UOM").Width("300px").ClientFooterTemplate("Count: #=kendo.format('{0}', count)#").ClientGroupFooterTemplate("Sub Count: #=kendo.format('{0}', count)#");
             })
             .Sortable()

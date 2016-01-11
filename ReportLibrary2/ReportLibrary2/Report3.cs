@@ -68,6 +68,8 @@ namespace ReportLibrary2
             //
             // TODO: Add any constructor code after InitializeComponent call
             //
+            
+            Report.Filters.Clear();
             for (int i = 0; i < FilterCount; i++)
             {
                 Report.Filters.Add(MyFilters[i]);
@@ -78,6 +80,7 @@ namespace ReportLibrary2
         {
             Debug.WriteLine("JSON: " + json);
             ReportModel data = new ReportModel(json);
+            ResetDefaults();
             GenerateHeaderFooters();
             for (int k = 0; k < data.GenerateTitleField.Length; k++)
             {
@@ -329,11 +332,21 @@ namespace ReportLibrary2
             }
             for (int i = 0; i < 50; i++)
             {
-                HeaderSections[i].Items.Clear();
-                FooterSections[i].Items.Clear();
-                AllGroups[i].Groupings.Clear();
+                if (HeaderSections[i] != null)
+                {
+                    HeaderSections[i].Items.Clear();
+                }
+                if (FooterSections[i] != null)
+                {
+                    FooterSections[i].Items.Clear();
+                }
+                if (AllGroups[i] != null)
+                {
+                    AllGroups[i].Groupings.Clear();
+                }
 
             }
+            FilterCount = 0;
             GroupCount = 0;
             Summing = 1;
             Counting = 0;
