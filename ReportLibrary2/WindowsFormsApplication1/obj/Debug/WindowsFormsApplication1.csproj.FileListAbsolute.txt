@@ -42,3 +42,6 @@ C:\Users\temer\Documents\Visual Studio 2015\Projects\ReportLibrary2\WindowsForms
 C:\Users\temer\Documents\Visual Studio 2015\Projects\ReportLibrary2\WindowsFormsApplication1\bin\Debug\zh-CN\GrapeCity.ActiveReports.v9.resources.dll
 C:\Users\temer\Documents\Visual Studio 2015\Projects\ReportLibrary2\WindowsFormsApplication1\bin\Debug\zh-CN\GrapeCity.ActiveReports.Viewer.Win.v9.resources.dll
 C:\Users\temer\Documents\Visual Studio 2015\Projects\ReportLibrary2\WindowsFormsApplication1\bin\Debug\zh-CN\GrapeCity.ActiveReports.Export.Image.v9.resources.dll
+C:\Users\rdenn\Documents\GitHub\Iris10ReportTesting\ReportLibrary2\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe.config
+C:\Users\rdenn\Documents\GitHub\Iris10ReportTesting\ReportLibrary2\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.exe
+C:\Users\rdenn\Documents\GitHub\Iris10ReportTesting\ReportLibrary2\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.pdb

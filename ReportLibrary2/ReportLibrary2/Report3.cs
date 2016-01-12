@@ -95,7 +95,12 @@ namespace ReportLibrary2
                 CreateFilterOption(data.Filters.GetValue(i).ToString());
             }
 
-            ChangeSqlString(data.ConnectionString);
+            for (int c = 0; c < data.SumOrCount.Length; c++)
+                     {
+                            SumOrCount("UOM", 0, "Fields." + data.SumOrCount.GetValue(c).ToString().Substring(1, data.SumOrCount.GetValue(c).ToString().Length - 2));
+                     }
+
+                     ChangeSqlString(data.ConnectionString);
             SQLCommandString = data.SelectCommand;
         }
 

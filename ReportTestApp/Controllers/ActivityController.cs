@@ -66,14 +66,15 @@ namespace ReportTestApp.Controllers
         }
 
         [HttpGet]
-        public string GetGridData(string columnData,string columnName, string groupData, string filterData)
-        {
+              public string GetGridData(string columnData, string columnName, string groupData, string filterData, string countFields)
+              {
             // Debug.WriteLine("YO: "+columnData+" | "+groupData);
            // Debug.WriteLine("Filter: "+filterData);
             var columns = StringHelper(columnData);
             var columnNames = StringHelper(columnName);
             var groups = StringHelper(groupData);
             var filters = FilterHelper(filterData);
+            var count = FieldCount(countFields);
             ReportObject.ReportName = "Test Report";
             ReportObject.ConnectionString = "Initial Catalog=A_Wallowa9;Data Source=10.0.0.40;User ID=developer;Password=aociris;";
             ReportObject.SelectCommand = "SELECT * FROM Activity";
@@ -81,6 +82,7 @@ namespace ReportTestApp.Controllers
             ReportObject.GenerateTitleField = columnNames.ToList();
             ReportObject.GroupBy = groups.ToList();
             ReportObject.Filters = filters.ToList();
+            ReportObject.SumOrCount = count.ToList();
             dynamic collectionWrapper = new
             {
 
@@ -134,7 +136,19 @@ namespace ReportTestApp.Controllers
             return arrayNull;
         }
 
+              private string[] FieldCount(string obj)
+              {
+                     var arrayNull = new string[0];
+                     if (obj.Length > 2)
+                     {
+                            obj = obj.Substring(1, obj.Length - 2);
+                            var array = obj.Split(',');
+                     
+                     Debug.WriteLine(array[0]);
+                     return array;
+              }		
+                     return arrayNull;		
+              }
 
-
-    }
+}
 }

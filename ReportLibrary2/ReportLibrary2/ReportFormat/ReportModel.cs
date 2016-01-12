@@ -20,7 +20,8 @@ namespace ReportFormat.Model
             GenerateTitleField = jUser["GenerateTitleField"].ToArray();
             GenerateDataField = jUser["GenerateDataField"].ToArray();
             Filters = jUser["Filters"].ToArray();
-        }
+            SumOrCount = jUser["SumOrCount"].ToArray();
+              }
 
 
 

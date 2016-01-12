@@ -133,6 +133,7 @@
         var fieldsDisplay = [];
         var groups = [];
         var filters = [];
+        var count = [];
         for (var k = 0; k < test.dataSource.options.fields.length; k++) {
             if (test.dataSource.options.fields[k].hidden != true && test.dataSource.options.fields[k].title != "Edit") {
                 fields.push(test.dataSource.options.fields[k].field);
@@ -152,71 +153,31 @@
                 }
             }
         }
-        alert("filters: "+filters.length);
-        //alert("This is the first column data source: " + test.dataSource.options.fields[1].field+
-        //"\nThis is the first group: " + test.dataSource.group()[0].field+
-        //"\nThis is the sort direction: " + test.dataSource.group()[0].dir);
-        $.ajax({
-            type: "get",
-            url: '@Url.Action("GetGridData", "Activity")', //'columnData': JSON.stringify(test.dataSource.options.fields)
-            data: { 'columnData': JSON.stringify(fields), 'columnName':JSON.stringify(fieldsDisplay), 'groupData': JSON.stringify(groups), 'filterData': JSON.stringify(filters) },
-            success: function (data) {
-                alert(data);
-                window.location.href = '@Url.Action("ReportViewerView1", "Home")';
+            if (test.dataSource.aggregate().length != 0) {
+                for (var i = 0; i < test.dataSource.aggregate().length; i++) {
+                    count.push(test.dataSource.aggregate()[i].field);
+                }
             }
-        });
-    }
 
+        //alert("filters: " + filters.length);
+            //alert("Count: " + count[0]);
+            //alert("This is the first column data source: " + test.dataSource.options.fields[1].field+
+            //"\nThis is the first group: " + test.dataSource.group()[0].field+
+            //"\nThis is the sort direction: " + test.dataSource.group()[0].dir);
+            $.ajax({
+                type: "get",
+                url: '@Url.Action("GetGridData", "Activity")', //'columnData': JSON.stringify(test.dataSource.options.fields)
+                data: { 'columnData': JSON.stringify(fields), 'columnName': JSON.stringify(fieldsDisplay), 'groupData': JSON.stringify(groups), 'filterData': JSON.stringify(filters), 'countFields': JSON.stringify(count) },
+                success: function (data) {
+                    alert(data);
+                    window.location.href = '@Url.Action("ReportViewerView1", "Home")';
+                }
+            });
+        }
+    
 </script>
 
 
-@*@(
-        Html.Kendo().Grid(Model)
-        .Name("MyGrid")
-        .DataSource(dataSource => dataSource
-        .Ajax()
-        .PageSize(10)
-        .Events(events => events.Error("error_Handler"))
-        .Model(model =>
-        {
-            model.Id(x => x.Activity_Key);
-        })
-        .Create(update => update.Action("_Edit", "Account"))
-        .Read(read => read.Action("_List", "Account"))
-        .Update(update => update.Action("_Edit", "Account"))
-        )
-        .Editable(settings => settings.Enabled(true))
-        .ToolBar(commands => commands.Create())
-          .Mobile()
-          .Pageable()
-        .ColumnMenu()
-        .Sortable()
-        .Groupable()
-        .Filterable()
-//.Navigatable(navigation => navigation.Enabled(true))
-//  // .Events(e => e.Edit("grid_Edit"))
-//  .Reorderable(reordering => reordering.Columns(true))
-//.CellAction(cell =>
-//{
-//    if (cell.Column.Title == "Activity Key")
-//    {
-//        if (cell.DataItem.Activity_Key.Contains("FF"))
-//        {
-//            //Set the background of this cell only
-//            cell.HtmlAttributes["style"] = "background:blue;";
-//        }
-//    }
-//})
-//.RowAction(row =>
-//{
-//    // "DataItem" is the Product instance to which the current row is bound
-//    if (row.DataItem.Name.Contains("3"))
-//    {
-//        //Set the background of the entire row
-//        row.HtmlAttributes["style"] = "background:red;";
-//    }
-//})
-)*@
 
 
 
