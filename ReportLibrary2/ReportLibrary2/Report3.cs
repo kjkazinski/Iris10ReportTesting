@@ -383,7 +383,7 @@ namespace ReportLibrary2
             CapLocX = 1.2666666507720947D;
         }
 
-
+              //this test   
         private void InitializeComponent2()
         {
             
