@@ -41,7 +41,12 @@ namespace IrisWeb.Reports.Model
         public List<string> Filters { get; set; }
 
         public string AddReportFooterSection { get; set; }
+
         public string AddPageNumbers { get; set; }
+
+        public bool StoreReportData { get; set; }
+
+        public List<string> SavedReportDatga { get; set; }
 
     }
 }
