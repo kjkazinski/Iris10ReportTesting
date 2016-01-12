@@ -134,6 +134,7 @@
         var groups = [];
         var filters = [];
         var count = [];
+        var aggType = [];
         for (var k = 0; k < test.dataSource.options.fields.length; k++) {
             if (test.dataSource.options.fields[k].hidden != true && test.dataSource.options.fields[k].title != "Edit") {
                 fields.push(test.dataSource.options.fields[k].field);
@@ -156,6 +157,7 @@
             if (test.dataSource.aggregate().length != 0) {
                 for (var i = 0; i < test.dataSource.aggregate().length; i++) {
                     count.push(test.dataSource.aggregate()[i].field);
+                    aggType.push(test.dataSource.aggregate()[i].aggregate);
                 }
             }
 
@@ -167,7 +169,7 @@
             $.ajax({
                 type: "get",
                 url: '@Url.Action("GetGridData", "Activity")', //'columnData': JSON.stringify(test.dataSource.options.fields)
-                data: { 'columnData': JSON.stringify(fields), 'columnName': JSON.stringify(fieldsDisplay), 'groupData': JSON.stringify(groups), 'filterData': JSON.stringify(filters), 'countFields': JSON.stringify(count) },
+                data: { 'columnData': JSON.stringify(fields), 'columnName': JSON.stringify(fieldsDisplay), 'groupData': JSON.stringify(groups), 'filterData': JSON.stringify(filters), 'countFields': JSON.stringify(count), 'aggregateType': JSON.stringify(aggType) },
                 success: function (data) {
                     alert(data);
                     window.location.href = '@Url.Action("ReportViewerView1", "Home")';

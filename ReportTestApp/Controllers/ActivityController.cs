@@ -66,7 +66,7 @@ namespace ReportTestApp.Controllers
         }
 
         [HttpGet]
-              public string GetGridData(string columnData, string columnName, string groupData, string filterData, string countFields)
+              public string GetGridData(string columnData, string columnName, string groupData, string filterData, string countFields, string aggregateType)
               {
             // Debug.WriteLine("YO: "+columnData+" | "+groupData);
            // Debug.WriteLine("Filter: "+filterData);
@@ -75,6 +75,7 @@ namespace ReportTestApp.Controllers
             var groups = StringHelper(groupData);
             var filters = FilterHelper(filterData);
             var count = FieldCount(countFields);
+            var average = FieldCount(aggregateType);
             ReportObject.ReportName = "Test Report";
             ReportObject.ConnectionString = "Initial Catalog=A_Wallowa9;Data Source=10.0.0.40;User ID=developer;Password=aociris;";
             ReportObject.SelectCommand = "SELECT * FROM Activity";
@@ -83,6 +84,7 @@ namespace ReportTestApp.Controllers
             ReportObject.GroupBy = groups.ToList();
             ReportObject.Filters = filters.ToList();
             ReportObject.SumOrCount = count.ToList();
+            ReportObject.AggregateType = average.ToList(); //Figure out a new name instead of an actual name dumb ass!!!!!
             dynamic collectionWrapper = new
             {
 

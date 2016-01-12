@@ -97,13 +97,15 @@ namespace ReportLibrary2
 
             for (int c = 0; c < data.SumOrCount.Length; c++)
                      {
-                            SumOrCount("UOM", 0, "Fields." + data.SumOrCount.GetValue(c).ToString().Substring(1, data.SumOrCount.GetValue(c).ToString().Length - 2));
+                      SumOrCount("=Fields." + data.SumOrCount.GetValue(c).ToString().Substring(1, data.SumOrCount.GetValue(c).ToString().Length - 2), data.AggregateType.GetValue(c).ToString(), "Fields." + data.SumOrCount.GetValue(c).ToString().Substring(1, data.SumOrCount.GetValue(c).ToString().Length - 2));
                      }
+            
 
                      ChangeSqlString(data.ConnectionString);
             SQLCommandString = data.SelectCommand;
         }
 
+              
         public static void CreateFilterOption(string obj)
         {
             //var field = "";
@@ -216,6 +218,7 @@ namespace ReportLibrary2
         {
             var sumCount = new TextBox();
             var totalBox = new TextBox();
+                     Debug.WriteLine("my name is: " + name);
             int spot = GetPosition(name);
 
             if (sumOrCount == 1)
@@ -265,21 +268,27 @@ namespace ReportLibrary2
             AllGroups[groupNum].Sortings.Add(new Sorting(field, dir));
         }
 
-        public static void SumOrCount(string name, int typeFlag, string field)
+        public static void SumOrCount(string name, string typeFlag, string field)
         {
             var sumCount = new TextBox();
-            int spot = GetPosition(name);
-            if (typeFlag == 1)
+            int spot = GetDataPosition(name);
+            if (typeFlag.Contains("sum"))
             {
 
-                sumCount = GenerateAttributes(MyCaptionBoxes[spot].Location, "= Sum(" + field + ")", "", "{0:$#,0.00}");
+                sumCount = GenerateAttributes(MyDataBoxes[spot].Location, "= Sum(" + field + ")", "", "{0:$#,0.00}");
                 FooterSections[GroupCount].Items.Add(sumCount);
             }
-            else if (typeFlag == 0)
+            else if (typeFlag.Contains("count"))
             {
-                sumCount = GenerateAttributes(MyCaptionBoxes[spot].Location, "= Count(" + field + ")", "", "{0:#,0}");
+                sumCount = GenerateAttributes(MyDataBoxes[spot].Location, "= Count(" + field + ")", "", "{0:#,0}");
                 FooterSections[GroupCount].Items.Add(sumCount);
             }
+
+            else if (typeFlag.Contains("average"))
+                     {
+                            sumCount = GenerateAttributes(MyDataBoxes[spot].Location, "= Average(" + field + ")", "", "{0:$#,0.00}");
+                            FooterSections[GroupCount].Items.Add(sumCount);
+                     }
         }
 
         public static void GenerateTextField(string title, string data) //Adds labels
@@ -322,10 +331,22 @@ namespace ReportLibrary2
             }
             return -1;
         }
-        /// <summary>
-        /// Refreshes the data on the telerik report so new data can be added.
-        /// </summary>
-        public static void ResetDefaults()
+
+              private static int GetDataPosition(string name)
+              {
+                     for (int i = 0; i < MyDataBoxes.Length; i++)
+                     {
+                            if (MyDataBoxes[i].Value == name)
+                            {
+                                   return i;
+                            }
+                     }
+                     return -1;
+              }
+              /// <summary>
+              /// Refreshes the data on the telerik report so new data can be added.
+              /// </summary>
+              public static void ResetDefaults()
         {
             for (int i = 0; i < count; i++)
             {

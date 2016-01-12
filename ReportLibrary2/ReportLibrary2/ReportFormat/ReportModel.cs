@@ -21,6 +21,7 @@ namespace ReportFormat.Model
             GenerateDataField = jUser["GenerateDataField"].ToArray();
             Filters = jUser["Filters"].ToArray();
             SumOrCount = jUser["SumOrCount"].ToArray();
+            AggregateType = jUser["AggregateType"].ToArray();
               }
 
 
@@ -57,8 +58,10 @@ namespace ReportFormat.Model
 
         public string AddReportFooterSection { get; set; }
         public string AddPageNumbers { get; set; }
+        public Array AggregateType { get; set; }
 
-    }
+
+       }
 }
 
 

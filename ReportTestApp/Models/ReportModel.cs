@@ -34,6 +34,8 @@ namespace IrisWeb.Reports.Model
 
         public List<string> SumOrCount { get; set; }
 
+       public List<string> AggregateType { get; set; }
+
         public List<int> ChangeBandColor { get; set; }
 
         public List<string> Filters { get; set; }
