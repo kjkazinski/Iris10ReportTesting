@@ -33,7 +33,7 @@ namespace IrisWeb.Reports.Model
         public List<string> GenerateDataField { get; set; }
 
         public List<string> SumOrCount { get; set; }
-
+        
        public List<string> AggregateType { get; set; }
 
         public List<int> ChangeBandColor { get; set; }
@@ -46,7 +46,7 @@ namespace IrisWeb.Reports.Model
 
         public bool StoreReportData { get; set; }
 
-        public List<string> SavedReportDatga { get; set; }
+        public List<string> SavedReportData { get; set; }
 
     }
 }
