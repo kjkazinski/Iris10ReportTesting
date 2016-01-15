@@ -1,0 +1,224 @@
+﻿@using IrisWeb.Code.Extensions;
+@using IrisWeb;
+@using IrisWeb.Code.Data.Models.Database;
+@model List<TransactModel>
+
+
+
+
+@{
+       ViewBag.Title = "Transact";
+}
+
+
+<h2>Report</h2>
+<button onclick="insertItem()">Insert new item</button>
+<button onclick="CreateObject()">Create Object</button>
+@*<button onclick="CreateObject()">Create Object</button>
+    <button onclick="insertItem()">Insert Item</button>*@
+@*<button onclick="@("window.location.href='" + @Url.Action() + "'");">View Report</button>*@
+
+<div>
+
+    @(Html.Kendo().Grid<TransactModel>()
+              .Name("Grid")
+              //.Pageable()
+              .BindTo(Model)
+      .Sortable()
+      .ColumnMenu()
+      .Groupable()
+      .Filterable()
+
+
+      .ToolBar(excel => excel.Excel())
+      .ToolBar(pdf => pdf.Pdf())
+
+
+      .Reorderable(reoderable => reoderable.Columns(true))
+
+
+      .Columns(columns =>
+      {
+          columns.Command(cmd => cmd.Edit()).Title("Edit");
+
+          columns.Bound(p => p.Transact_Key).Title("Transact Key");
+          columns.Bound(p => p.DateStamp).Title("Task Date");
+          columns.Bound(p => p.Crew_Num).Title("Crew #");
+          columns.Bound(p => p.Equipment_Key).Title("Equipment Name");
+          columns.Bound(p => p.Bill_Rate).Format("{0:c}").ClientFooterTemplate("Total: #=kendo.format('{0:c}', sum)#").ClientGroupFooterTemplate("Sub Total: #=kendo.format('{0:c}', sum)#");
+          columns.Bound(p => p.Overridden_Labor_Rate).Title("Overridden Labor Rate");
+          columns.Bound(p => p.Employee_Rate).Format("{0:c}").ClientFooterTemplate("Average: #=kendo.format('{0:c}', average)#").ClientGroupFooterTemplate("Sub average: #=kendo.format('{0:c}', average)#");
+          columns.Bound(p => p.RecordID).Title("Record ID").ClientFooterTemplate("Count: #=kendo.format('{0}', count)#").ClientGroupFooterTemplate("Sub Count: #=kendo.format('{0}', count)#");
+      }
+
+             )
+
+
+
+
+
+
+      .DataSource(dataSource => dataSource
+         .Ajax()
+
+
+         .Aggregates(aggregates =>
+         {
+             aggregates.Add(p => p.Bill_Rate).Sum();
+             aggregates.Add(p => p.Employee_Rate).Average();
+             aggregates.Add(p => p.RecordID).Count();
+         })
+         .ServerOperation(false)
+         .Model(model =>
+         {
+             model.Id(x => x.Class_Rate);
+
+
+
+         })
+
+                  .Read(read => read.Action("Transact", "Transact")) // Make a contoller that returns this data
+    .Update(update => update.Action("Transact", "Transact"))
+    )
+
+
+    )
+</div>
+@*<script src="//kendo.cdn.telerik.com/2015.3.1111/js/pako_deflate.min.js"></script>
+    <script src="http://cdn.kendostatic.com/2013.2.716/js/cultures/kendo.culture.en-US.min.js"></script>*@
+
+
+
+@{
+       ViewBag.Title = "Data Page";
+}
+
+
+@*<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Kendo UI Snippet</title>
+
+        <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2015.3.1111/styles/kendo.common.min.css" />
+        <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2015.3.1111/styles/kendo.rtl.min.css" />
+        <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2015.3.1111/styles/kendo.silver.min.css" />
+        <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2015.3.1111/styles/kendo.mobile.all.min.css" />
+
+        <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+        <script src="http://kendo.cdn.telerik.com/2015.3.1111/js/kendo.all.min.js"></script>
+    </head>
+    <body>
+
+
+        <div id="spreadsheet">
+        </div>
+
+        <script>
+            var dataSource = new kendo.data.DataSource();
+            $(document).ready(function () {
+                $.ajax({
+                    dataType: "json",
+                    url: '@Url.Action("GetStuff", "Home")',
+                    data: { 'myTable': "Activity" },
+                    success: function (data) {
+                        dataSource.data(data);
+                    }
+                });
+            });
+
+            $("#spreadsheet").kendoSpreadsheet({
+                sheetsbar: false,
+                dataSource: dataSource
+            });
+
+        </script>
+    </body>
+    </html>*@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+
+    function insertItem() {
+        var grid = $("#Grid").data("kendoGrid");
+        grid.addRow();
+        $(".k-grid-edit-row").appendTo("#Grid tbody");
+    }
+
+    function CreateObject() {
+        var test = $("#Grid").getKendoGrid();
+        var fields = [];
+        var fieldsDisplay = [];
+        var groups = [];
+        var filters = [];
+        var count = [];
+        var aggType = [];
+        for (var k = 0; k < test.dataSource.options.fields.length; k++) {
+            if (test.dataSource.options.fields[k].hidden != true && test.dataSource.options.fields[k].title != "Edit") {
+                fields.push(test.dataSource.options.fields[k].field);
+                fieldsDisplay.push(test.dataSource.options.fields[k].title);
+            }
+        }
+        if (test.dataSource.group().length != 0) {
+            for (var k = 0; k < test.dataSource.group().length; k++) {
+                groups.push(test.dataSource.group()[k].field);
+            }
+        }
+        if (test.dataSource.filter() != undefined) {
+            alert("filter: " + test.dataSource.filter());
+            if (test.dataSource.filter().length != 0) {
+                for (var i = 0; i < test.dataSource.filter().filters.length; i++) {
+                    filters.push(test.dataSource.filter().filters[i]);
+                }
+            }
+        }
+            if (test.dataSource.aggregate().length != 0) {
+                for (var i = 0; i < test.dataSource.aggregate().length; i++) {
+                    count.push(test.dataSource.aggregate()[i].field);
+                    aggType.push(test.dataSource.aggregate()[i].aggregate);
+                }
+            }
+
+        //alert("filters: " + filters.length);
+            //alert("Count: " + count[0]);
+            //alert("This is the first column data source: " + test.dataSource.options.fields[1].field+
+            //"\nThis is the first group: " + test.dataSource.group()[0].field+
+            //"\nThis is the sort direction: " + test.dataSource.group()[0].dir);
+            $.ajax({
+                type: "get",
+                url: '@Url.Action("GetGridData", "Transact")', //'columnData': JSON.stringify(test.dataSource.options.fields)
+                data: { 'columnData': JSON.stringify(fields), 'columnName': JSON.stringify(fieldsDisplay), 'groupData': JSON.stringify(groups), 'filterData': JSON.stringify(filters), 'countFields': JSON.stringify(count), 'aggregateType': JSON.stringify(aggType) },
+                success: function (data) {
+                    alert(data);
+                    window.location.href = '@Url.Action("ReportViewerView1", "Home")';
+                }
+            });
+        }
+
+</script>
+
+
+

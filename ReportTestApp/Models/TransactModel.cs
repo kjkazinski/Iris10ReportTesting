@@ -51,7 +51,7 @@ namespace IrisWeb.Code.Data.Models.Database
         [ReadOnly(true)]
         [MaxLength(10)]
         [Display(Name = "Equipment")]
-        public string EquipmentName { get; set; }
+        public string Equipment_Key { get; set; }
 
         [ReadOnly(true)]
         [Required(ErrorMessage = "Your {0} is required.")]

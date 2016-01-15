@@ -286,7 +286,7 @@ namespace ReportLibrary2
 
             else if (typeFlag.Contains("average"))
                      {
-                            sumCount = GenerateAttributes(MyDataBoxes[spot].Location, "= Average(" + field + ")", "", "{0:$#,0.00}");
+                            sumCount = GenerateAttributes(MyDataBoxes[spot].Location, "= Avg(" + field + ")", "", "{0:$#,0.00}");
                             FooterSections[GroupCount].Items.Add(sumCount);
                      }
         }
