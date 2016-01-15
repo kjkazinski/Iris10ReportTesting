@@ -11,6 +11,9 @@ namespace ReportLibrary2
     using System.Collections.Generic;
     using ReportFormat.Model;
     using Newtonsoft.Json;
+    using System.Xml;
+    using System.Text;
+    using System.IO;
 
     /// <summary>
     /// Summary description for Report3.
@@ -57,6 +60,7 @@ namespace ReportLibrary2
         public static int ColorB = 227;
         public static Filter[] MyFilters = new Filter[50];
         public static int FilterCount = 0;
+        public static string myString = "";
 
 
         public Report3()
@@ -74,6 +78,23 @@ namespace ReportLibrary2
             {
                 Report.Filters.Add(MyFilters[i]);
             }
+
+            using (var sw = new StringWriter())
+            {
+                using (var xw = XmlWriter.Create(sw))
+                {
+                    // Build Xml with xw.
+                    Telerik.Reporting.XmlSerialization.ReportXmlSerializer xmlSerializer =
+                    new Telerik.Reporting.XmlSerialization.ReportXmlSerializer();
+
+                    xmlSerializer.Serialize(xw, this.Report);
+
+                }
+                myString = sw.ToString();
+            }
+
+            Debug.WriteLine("not XML: " + Detail.Items[0]);
+
         }
 
         public static void GetJSON(string json)
@@ -103,9 +124,88 @@ namespace ReportLibrary2
 
                      ChangeSqlString(data.ConnectionString);
             SQLCommandString = data.SelectCommand;
+
+            
         }
 
-              
+        public static void SetXMLObject()
+        {
+            //Fill in code to save this to a seperate class
+            /*  Example Report XML from serialized Object:
+
+            <?xml version="1.0" encoding="utf-16"?>
+            <Report DataSourceName="sqlDataSource1" Width="6in" UnitOfMeasure="Inch" PageNumberingStyle="Continue" StyleName="" DocumentMapText="" xmlns="http://schemas.telerik.com/reporting/2012/3.8">
+            <DataSources>
+            <SqlDataSource ConnectionString="Initial Catalog=A_Wallowa9;Data Source=10.0.0.40;User ID=developer;Password=aociris;" SelectCommand="SELECT * FROM Activity" Name="sqlDataSource1" />
+            </DataSources>
+            <Items>
+            <DetailSection KeepTogether="True" Height="1in">
+            <Items>
+            <TextBox Width="1.26666665077209in" Height="0.441666692495346in" Left="1.26666665077209in" Top="0.140833333954215in" Value="=Fields.Activity_Key" Format="{0:$#,0.00}" CanGrow="True" Multiline="True" Culture="null" Name="Activity Key" />
+            <TextBox Width="1.26666665077209in" Height="0.441666692495346in" Left="2.63333330154419in" Top="0.140833333954215in" Value="=Fields.DateStamp" CanGrow="True" Name="Date" />
+            <TextBox Width="1.26666665077209in" Height="0.441666692495346in" Left="3.99999995231628in" Top="0.140833333954215in" Value="=Fields.Description" Format="{0:$#,0.00}" CanGrow="True" Name="Description" />
+            <TextBox Width="1.26666665077209in" Height="0.441666692495346in" Left="5.36666660308838in" Top="0.140833333954215in" Value="=Fields.UOM_Key" Format="{0:$#,0.00}" CanGrow="True" Name="UOM" />
+            </Items>
+            </DetailSection>
+            </Items>
+            <PageSettings>
+            <PageSettings PaperKind="Letter">
+            <Margins>
+            <MarginsU Left="1in" Right="1in" Top="1in" Bottom="1in" />
+            </Margins>
+            </PageSettings>
+            </PageSettings>
+            <Filters>
+            <Filter Expression="=Fields.Activity_Key" Operator="Like" Value="%1%" />
+            </Filters>
+            <Groups>
+            <Group>
+            <GroupHeader>
+            <GroupHeaderSection Height="0.441666692495346in">
+            <Style BackgroundColor="224, 224, 224" />
+            <Items>
+            <TextBox Width="1.26666665077209in" Height="0.441666692495346in" Left="1.26666665077209in" Top="0.140833333954215in" Value="Activity Key" Format="{0}" CanGrow="True" Name="Activity Key" />
+            <TextBox Width="1.26666665077209in" Height="0.441666692495346in" Left="2.63333330154419in" Top="0.140833333954215in" Value="Date" CanGrow="True" Name="Date" />
+            <TextBox Width="1.26666665077209in" Height="0.441666692495346in" Left="3.99999995231628in" Top="0.140833333954215in" Value="Description" Format="{0}" CanGrow="True" Name="Description" />
+            <TextBox Width="1.26666665077209in" Height="0.441666692495346in" Left="5.36666660308838in" Top="0.140833333954215in" Value="UOM" Format="{0}" CanGrow="True" Name="UOM" />
+            </Items>
+            </GroupHeaderSection>
+            </GroupHeader>
+            <GroupFooter>
+            <GroupFooterSection PrintAtBottom="False" Height="0.441666692495346in" />
+            </GroupFooter>
+            </Group>
+            <Group>
+            <GroupHeader>
+            <GroupHeaderSection Height="0.441666692495346in">
+            <Style BackgroundColor="224, 224, 224" />
+            <Items>
+            <TextBox Width="1.26666665077209in" Height="0.441666692495346in" Left="0.140833333954215in" Top="0.140833333954215in" Value="UOM_Key" Format="{0}" CanGrow="True" Name="UOM_Key" />
+            <TextBox Width="1.26666665077209in" Height="0.441666692495346in" Left="1.54083333395422in" Top="0.140833333954215in" Value="=Fields.UOM_Key" Format="{0}" CanGrow="True" Name="UOM_Key" />
+            </Items>
+            </GroupHeaderSection>
+            </GroupHeader>
+            <GroupFooter>
+            <GroupFooterSection Height="0.441666692495346in">
+            <Items>
+            <TextBox Width="1.26666665077209in" Height="0.441666692495346in" Left="3.99999995231628in" Top="0.140833333954215in" Value="= Count(Fields.Description)" Format="{0:#,0}" CanGrow="True" Name="" />
+            <TextBox Width="1.26666665077209in" Height="0.441666692495346in" Left="5.36666660308838in" Top="0.140833333954215in" Value="= Count(Fields.UOM_Key)" Format="{0:#,0}" CanGrow="True" Name="" />
+            </Items>
+            </GroupFooterSection>
+            </GroupFooter>
+            <Groupings>
+            <Grouping Expression="=Fields.UOM_Key" />
+            </Groupings>
+            </Group>
+            </Groups>
+            </Report>
+
+
+
+            */
+        }
+
+
         public static void CreateFilterOption(string obj)
         {
             //var field = "";
