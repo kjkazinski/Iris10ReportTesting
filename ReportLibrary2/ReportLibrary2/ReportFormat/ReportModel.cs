@@ -14,23 +14,27 @@ namespace ReportFormat.Model
             JObject jObject = JObject.Parse(json);
             JToken jUser = jObject["myRoot"];
             ReportName = (string)jUser["ReportName"];
+            AddReportHeader = (string) jUser["AddReportHeader"];
             ConnectionString = (string)jUser["ConnectionString"];
             SelectCommand = (string)jUser["SelectCommand"];
+            CountyName = (string) jUser["CountyName"];
             GroupBy = jUser["GroupBy"].ToArray();
+            AddSortings = jUser["AddSortings"].ToArray();
             GenerateTitleField = jUser["GenerateTitleField"].ToArray();
             GenerateDataField = jUser["GenerateDataField"].ToArray();
             Filters = jUser["Filters"].ToArray();
             SumOrCount = jUser["SumOrCount"].ToArray();
             AggregateType = jUser["AggregateType"].ToArray();
+            ChangeBandColor = jUser["ChangeBandColor"].ToArray();
+            AddReportFooterSection = (string) jUser["AddReportFooterSection"];
+            AddPageNumbers = (string) jUser["AddPageNumbers"];
+
               }
 
 
 
         public string ReportName { get; set; }
         public string AddReportHeader { get; set; }
-
-        //call only
-        public string GenerateHeaderFooters { get; set; }
 
         //recieve connection string, no annotations
         public string ConnectionString { get; set; }
