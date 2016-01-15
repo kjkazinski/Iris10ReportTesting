@@ -77,8 +77,9 @@ namespace ReportTestApp.Controllers
             var count = FieldCount(countFields);
             var average = FieldCount(aggregateType);
             ReportObject.ReportName = "Test Report";
-            ReportObject.ConnectionString = "Initial Catalog=Jefferson;Data Source=localhost;User ID=developer;Password=aociris;";
-            ReportObject.SelectCommand = "SELECT * FROM dbo.Activity";
+            ReportObject.ConnectionString = "Initial Catalog=A_Wallowa9;Data Source=10.0.0.40;User ID=developer;Password=aociris;";
+                     /*"Initial Catalog=Jefferson;Data Source=localhost;User ID=developer;Password=aociris;";*/
+                     ReportObject.SelectCommand = "SELECT * FROM Activity";
             ReportObject.GenerateDataField = columns.ToList();
             ReportObject.GenerateTitleField = columnNames.ToList();
             ReportObject.GroupBy = groups.ToList();

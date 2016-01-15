@@ -150,6 +150,7 @@
     <Compile Include="Controllers\ActivityModelsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ReportsController.cs" />
+    <Compile Include="Controllers\TransactController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -866,6 +867,7 @@
     <Content Include="Views\ActivityModels\Details.cshtml" />
     <Content Include="Views\ActivityModels\Edit.cshtml" />
     <Content Include="Views\ActivityModels\Index.cshtml" />
+    <Content Include="Views\Transact\Transact.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Site.css" />

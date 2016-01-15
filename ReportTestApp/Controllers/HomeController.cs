@@ -59,8 +59,13 @@ namespace ReportTestApp.Controllers
 
         public ActionResult About()
         {
-            
-            return View();
+                    
+                     
+                     var filter = new SqlGenerator(SqlGenerator.SqlTypes.Select, "Transact");
+                     filter.SelectStatementLimit = 1000;
+                     var baseModel = ModelBase.LoadModel<TransactModel>(filter);
+                     return View(baseModel.ToList());
+                    // return View();
         }
 
         [HttpGet]

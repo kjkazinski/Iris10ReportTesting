@@ -18,15 +18,19 @@ namespace IrisWeb
         {
             if (name == "CountyDatabase")
             {
-                return "Initial Catalog=Jefferson;Data Source=localhost;User ID=developer;Password=aociris;";
-                //return "Initial Catalog=A_Wallowa9;Data Source=10.0.0.40;User ID=developer;Password=aociris;";
-                // return "Initial Catalog=Z_Marion;Data Source=192.168.104.202;User ID=developer;Password=aociris;";
-            }
+                return
+                            //"Initial Catalog=Jefferson;Data Source=localhost;User ID=developer;Password=aociris;";
+
+                            "Initial Catalog=A_Wallowa9;Data Source=10.0.0.40;User ID=developer;Password=aociris;";
+                            // return "Initial Catalog=Z_Marion;Data Source=192.168.104.202;User ID=developer;Password=aociris;";
+                     }
             else
             {
-                return "Initial Catalog=IRISSystemData;Data Source=10.0.0.40;User ID=developer;Password=aociris;";
-                //return "Initial Catalog="+name+";Data Source=192.168.104.202;User ID=developer;Password=aociris;";
-            }
+                return
+
+                            "Initial Catalog=IRISSystemData;Data Source=10.0.0.40;User ID=developer;Password=aociris;";
+                            //return "Initial Catalog="+name+";Data Source=192.168.104.202;User ID=developer;Password=aociris;";
+                     }
         }
 
         public static bool AddConnectionString(string connectionName, string connectionString)
