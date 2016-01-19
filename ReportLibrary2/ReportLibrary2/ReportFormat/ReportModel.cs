@@ -28,7 +28,7 @@ namespace ReportFormat.Model
             ChangeBandColor = jUser["ChangeBandColor"].ToArray();
             AddReportFooterSection = (string) jUser["AddReportFooterSection"];
             AddPageNumbers = (string) jUser["AddPageNumbers"];
-
+            GroupName = jUser["GroupName"].ToArray();
               }
 
 
@@ -47,6 +47,8 @@ namespace ReportFormat.Model
 
         //recieve data field, annotations define function
         public Array GroupBy { get; set; }
+
+        public Array GroupName { get; set; }
 
         public Array AddSortings { get; set; }
 

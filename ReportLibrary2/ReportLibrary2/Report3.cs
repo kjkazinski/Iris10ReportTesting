@@ -109,7 +109,7 @@ namespace ReportLibrary2
             }
             for (int a = 0; a < data.GroupBy.Length; a++)
             {
-                GroupBy(data.GroupBy.GetValue(a).ToString(), "=Fields." + data.GroupBy.GetValue(a).ToString());
+                GroupBy(data.GroupName.GetValue(a).ToString(), "=Fields." + data.GroupBy.GetValue(a).ToString());
             }
             for (int i = 0; i < data.Filters.Length; i++)
             {

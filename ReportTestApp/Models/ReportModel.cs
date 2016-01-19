@@ -26,6 +26,8 @@ namespace IrisWeb.Reports.Model
         //recieve data field, annotations define function
         public List<string> GroupBy { get; set; }
 
+        public List<string> GroupName { get; set; }
+
         public List<string> AddSortings { get; set; }
 
         public List<string> GenerateTitleField { get; set; }
