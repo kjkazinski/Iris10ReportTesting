@@ -66,16 +66,29 @@ namespace ReportTestApp.Controllers
         }
 
         [HttpGet]
-              public string GetGridData(string columnData, string columnName, string groupData, string filterData, string countFields, string aggregateType)
-              {
+        public string GetGridData(string columnData, string columnName, string groupData, string filterData, string countFields, string aggregateType)
+        {
             // Debug.WriteLine("YO: "+columnData+" | "+groupData);
-           // Debug.WriteLine("Filter: "+filterData);
+            // Debug.WriteLine("Filter: "+filterData);
             var columns = StringHelper(columnData);
             var columnNames = StringHelper(columnName);
             var groups = StringHelper(groupData);
+            var groupNames = StringHelper(groupData);
             var filters = FilterHelper(filterData);
             var count = FieldCount(countFields);
             var average = FieldCount(aggregateType);
+
+            for (int i = 0; i < groups.Length; i++)
+            {
+                for(int k = 0; k < columns.Length; k++)
+                {
+                    if(groups[i] == columns[k])
+                    {
+                        groupNames[i] = columnNames[k];
+                    }
+                }
+            }
+
             ReportObject.ReportName = "Test Report";
             ReportObject.ConnectionString = "Initial Catalog=A_Wallowa9;Data Source=10.0.0.40;User ID=developer;Password=aociris;";
                      /*"Initial Catalog=Jefferson;Data Source=localhost;User ID=developer;Password=aociris;";*/
@@ -83,6 +96,7 @@ namespace ReportTestApp.Controllers
             ReportObject.GenerateDataField = columns.ToList();
             ReportObject.GenerateTitleField = columnNames.ToList();
             ReportObject.GroupBy = groups.ToList();
+            ReportObject.GroupName = groupNames.ToList();
             ReportObject.Filters = filters.ToList();
             ReportObject.SumOrCount = count.ToList();
             ReportObject.AggregateType = average.ToList(); //Figure out a new name instead of an actual name dumb ass!!!!!
