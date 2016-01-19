@@ -120,8 +120,9 @@ namespace ReportLibrary2
                      {
                       SumOrCount("=Fields." + data.SumOrCount.GetValue(c).ToString().Substring(1, data.SumOrCount.GetValue(c).ToString().Length - 2), data.AggregateType.GetValue(c).ToString(), "Fields." + data.SumOrCount.GetValue(c).ToString().Substring(1, data.SumOrCount.GetValue(c).ToString().Length - 2));
                      }
-            
 
+
+                     
                      ChangeSqlString(data.ConnectionString);
             SQLCommandString = data.SelectCommand;
 
