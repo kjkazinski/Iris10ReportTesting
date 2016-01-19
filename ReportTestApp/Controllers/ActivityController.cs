@@ -100,6 +100,7 @@ namespace ReportTestApp.Controllers
             ReportObject.Filters = filters.ToList();
             ReportObject.SumOrCount = count.ToList();
             ReportObject.AggregateType = average.ToList(); //Figure out a new name instead of an actual name dumb ass!!!!!
+            ReportObject.AddReportFooterSection = "Description";
             dynamic collectionWrapper = new
             {
 

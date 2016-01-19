@@ -121,8 +121,9 @@ namespace ReportLibrary2
                       SumOrCount("=Fields." + data.SumOrCount.GetValue(c).ToString().Substring(1, data.SumOrCount.GetValue(c).ToString().Length - 2), data.AggregateType.GetValue(c).ToString(), "Fields." + data.SumOrCount.GetValue(c).ToString().Substring(1, data.SumOrCount.GetValue(c).ToString().Length - 2));
                      }
 
+                     AddReportFooterSection(0, "Fields." + data.AddReportFooterSection.ToString(),"Report Footer");
 
-                     
+
                      ChangeSqlString(data.ConnectionString);
             SQLCommandString = data.SelectCommand;
 
@@ -320,7 +321,8 @@ namespace ReportLibrary2
             var sumCount = new TextBox();
             var totalBox = new TextBox();
                      Debug.WriteLine("my name is: " + name);
-            int spot = GetPosition(name);
+                     //int spot = GetPosition(name);
+                     int spot = 2;
 
             if (sumOrCount == 1)
             {
@@ -330,6 +332,7 @@ namespace ReportLibrary2
             {
                 sumCount = GenerateAttributes(MyCaptionBoxes[spot].Location, "= Count(" + section + ")", name, "{0:$#,0.00}");
             }
+        
             ReportFooter.Items.Add(sumCount);
             totalBox = GenerateAttributes(MyCaptionBoxes[0].Location, "Grand Total: ", name, "{0:$#,0.00}");
             ReportFooter.Items.Add(totalBox);
