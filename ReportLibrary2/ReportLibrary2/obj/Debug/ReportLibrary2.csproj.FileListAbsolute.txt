@@ -55,4 +55,3 @@ C:\Users\temer\Documents\GitHub\Iris10ReportTesting\ReportLibrary2\ReportLibrary
 C:\Users\temer\Documents\GitHub\Iris10ReportTesting\ReportLibrary2\ReportLibrary2\obj\Debug\ReportLibrary2.dll.licenses
 C:\Users\temer\Documents\GitHub\Iris10ReportTesting\ReportLibrary2\ReportLibrary2\obj\Debug\ReportLibrary2.dll
 C:\Users\temer\Documents\GitHub\Iris10ReportTesting\ReportLibrary2\ReportLibrary2\obj\Debug\ReportLibrary2.pdb
-C:\Users\temer\Documents\GitHub\Iris10ReportTesting\ReportLibrary2\ReportLibrary2\obj\Debug\ReportLibrary2.csprojResolveAssemblyReference.cache

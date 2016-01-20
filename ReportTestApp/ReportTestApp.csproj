@@ -53,8 +53,8 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Kendo.Mvc, Version=2015.2.902.545, Culture=neutral, PublicKeyToken=121fae78165ba3d4, processorArchitecture=MSIL">
-      <HintPath>..\lib\KENDOUIMVC\2015.2.902.545\Kendo.Mvc.dll</HintPath>
-      <Private>True</Private>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Telerik\UI for ASP.NET MVC Q1 2016\wrappers\aspnetmvc\Binaries\Mvc5\Kendo.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -62,15 +62,23 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.8.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.8.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Net.Http" />
-    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.20710.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
+    <Reference Include="System.Net.Http.Extensions, Version=2.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\net45\System.Net.Http.Extensions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http.Primitives, Version=4.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\net45\System.Net.Http.Primitives.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Net.Http.WebRequest" />
@@ -86,12 +94,12 @@
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.20710.0\lib\net40\System.Web.Http.dll</HintPath>
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.4.0.30506.0\lib\net40\System.Web.Http.WebHost.dll</HintPath>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -547,45 +555,21 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
-    <None Include="Scripts\jquery-2.1.4-vsdoc.js" />
+    <None Include="Scripts\jquery-2.2.0.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\jquery-2.1.4.js" />
-    <Content Include="Scripts\jquery-2.1.4.min.js" />
-    <Content Include="Scripts\ListSource.js" />
-    <Content Include="Content\kendo\2015.2.902\fonts\DejaVu\DejaVuSans-Bold.ttf" />
-    <Content Include="Content\kendo\2015.2.902\fonts\DejaVu\DejaVuSans-BoldOblique.ttf" />
-    <Content Include="Content\kendo\2015.2.902\fonts\DejaVu\DejaVuSans-ExtraLight.ttf" />
-    <Content Include="Content\kendo\2015.2.902\fonts\DejaVu\DejaVuSans-Oblique.ttf" />
-    <Content Include="Content\kendo\2015.2.902\fonts\DejaVu\DejaVuSans.ttf" />
-    <Content Include="Content\kendo\2015.2.902\fonts\DejaVu\DejaVuSansMono-Bold.ttf" />
-    <Content Include="Content\kendo\2015.2.902\fonts\DejaVu\DejaVuSansMono-BoldOblique.ttf" />
-    <Content Include="Content\kendo\2015.2.902\fonts\DejaVu\DejaVuSansMono-Oblique.ttf" />
-    <Content Include="Content\kendo\2015.2.902\fonts\DejaVu\DejaVuSansMono.ttf" />
-    <Content Include="Content\kendo\2015.2.902\fonts\DejaVu\DejaVuSerif-Bold.ttf" />
-    <Content Include="Content\kendo\2015.2.902\fonts\DejaVu\DejaVuSerif-BoldItalic.ttf" />
-    <Content Include="Content\kendo\2015.2.902\fonts\DejaVu\DejaVuSerif-Italic.ttf" />
-    <Content Include="Content\kendo\2015.2.902\fonts\DejaVu\DejaVuSerif.ttf" />
-    <Content Include="Content\kendo\2015.2.902\images\kendoui.ttf" />
-    <Content Include="Content\kendo\2015.2.902\images\kendoui.woff" />
-    <Content Include="ClassDiagram1.cd" />
-    <Content Include="Scripts\respond.js" />
-    <Content Include="Scripts\respond.min.js" />
-    <Content Include="Views\Content\test.json" />
-    <Content Include="packages.config" />
-    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-    <None Include="Scripts\jquery-2.1.4.intellisense.js" />
-    <Content Include="Scripts\kendo.modernizr.custom.js" />
+    <Content Include="Scripts\jquery-2.2.0.js" />
+    <Content Include="Scripts\jquery-2.2.0.min.js" />
     <Content Include="Scripts\kendo\2015.2.902\angular.min.js" />
     <Content Include="Scripts\kendo\2015.2.902\jquery.min.js" />
     <Content Include="Scripts\kendo\2015.2.902\jszip.min.js" />
-    <Content Include="Scripts\jquery-2.1.4.min.map" />
-    <None Include="Scripts\kendo\2015.2.902\kendo.all-vsdoc.js" />
-    <None Include="Scripts\kendo\2015.2.902\kendo.all.min.intellisense.js" />
     <Content Include="Scripts\kendo\2015.2.902\kendo.all.min.js" />
     <Content Include="Scripts\kendo\2015.2.902\kendo.angular.min.js" />
+    <Content Include="Scripts\kendo\2015.2.902\kendo.angular2.min.js" />
     <Content Include="Scripts\kendo\2015.2.902\kendo.aspnetmvc.min.js" />
     <Content Include="Scripts\kendo\2015.2.902\kendo.autocomplete.min.js" />
     <Content Include="Scripts\kendo\2015.2.902\kendo.binder.min.js" />
@@ -601,7 +585,6 @@
     <Content Include="Scripts\kendo\2015.2.902\kendo.data.odata.min.js" />
     <Content Include="Scripts\kendo\2015.2.902\kendo.data.signalr.min.js" />
     <Content Include="Scripts\kendo\2015.2.902\kendo.data.xml.min.js" />
-    <None Include="Scripts\kendo\2015.2.902\kendo.dataviz-vsdoc.js" />
     <Content Include="Scripts\kendo\2015.2.902\kendo.dataviz.barcode.min.js" />
     <Content Include="Scripts\kendo\2015.2.902\kendo.dataviz.chart.funnel.min.js" />
     <Content Include="Scripts\kendo\2015.2.902\kendo.dataviz.chart.min.js" />
@@ -610,7 +593,6 @@
     <Content Include="Scripts\kendo\2015.2.902\kendo.dataviz.diagram.min.js" />
     <Content Include="Scripts\kendo\2015.2.902\kendo.dataviz.gauge.min.js" />
     <Content Include="Scripts\kendo\2015.2.902\kendo.dataviz.map.min.js" />
-    <None Include="Scripts\kendo\2015.2.902\kendo.dataviz.min.intellisense.js" />
     <Content Include="Scripts\kendo\2015.2.902\kendo.dataviz.min.js" />
     <Content Include="Scripts\kendo\2015.2.902\kendo.dataviz.mobile.min.js" />
     <Content Include="Scripts\kendo\2015.2.902\kendo.dataviz.qrcode.min.js" />
@@ -641,7 +623,6 @@
     <Content Include="Scripts\kendo\2015.2.902\kendo.listview.min.js" />
     <Content Include="Scripts\kendo\2015.2.902\kendo.maskedtextbox.min.js" />
     <Content Include="Scripts\kendo\2015.2.902\kendo.menu.min.js" />
-    <None Include="Scripts\kendo\2015.2.902\kendo.mobile-vsdoc.js" />
     <Content Include="Scripts\kendo\2015.2.902\kendo.mobile.actionsheet.min.js" />
     <Content Include="Scripts\kendo\2015.2.902\kendo.mobile.application.min.js" />
     <Content Include="Scripts\kendo\2015.2.902\kendo.mobile.button.min.js" />
@@ -650,7 +631,6 @@
     <Content Include="Scripts\kendo\2015.2.902\kendo.mobile.drawer.min.js" />
     <Content Include="Scripts\kendo\2015.2.902\kendo.mobile.listview.min.js" />
     <Content Include="Scripts\kendo\2015.2.902\kendo.mobile.loader.min.js" />
-    <None Include="Scripts\kendo\2015.2.902\kendo.mobile.min.intellisense.js" />
     <Content Include="Scripts\kendo\2015.2.902\kendo.mobile.min.js" />
     <Content Include="Scripts\kendo\2015.2.902\kendo.mobile.modalview.min.js" />
     <Content Include="Scripts\kendo\2015.2.902\kendo.mobile.navbar.min.js" />
@@ -690,6 +670,7 @@
     <Content Include="Scripts\kendo\2015.2.902\kendo.slider.min.js" />
     <Content Include="Scripts\kendo\2015.2.902\kendo.sortable.min.js" />
     <Content Include="Scripts\kendo\2015.2.902\kendo.splitter.min.js" />
+    <Content Include="Scripts\kendo\2015.2.902\kendo.spreadsheet.min.js" />
     <Content Include="Scripts\kendo\2015.2.902\kendo.tabstrip.min.js" />
     <Content Include="Scripts\kendo\2015.2.902\kendo.timepicker.min.js" />
     <Content Include="Scripts\kendo\2015.2.902\kendo.timezones.min.js" />
@@ -704,11 +685,34 @@
     <Content Include="Scripts\kendo\2015.2.902\kendo.validator.min.js" />
     <Content Include="Scripts\kendo\2015.2.902\kendo.view.min.js" />
     <Content Include="Scripts\kendo\2015.2.902\kendo.virtuallist.min.js" />
-    <None Include="Scripts\kendo\2015.2.902\kendo.web-vsdoc.js" />
-    <None Include="Scripts\kendo\2015.2.902\kendo.web.min.intellisense.js" />
     <Content Include="Scripts\kendo\2015.2.902\kendo.web.min.js" />
+    <Content Include="Scripts\kendo\2015.2.902\kendo.webcomponents.min.js" />
     <Content Include="Scripts\kendo\2015.2.902\kendo.window.min.js" />
     <Content Include="Scripts\kendo\2015.2.902\pako_deflate.min.js" />
+    <Content Include="Scripts\ListSource.js" />
+    <Content Include="Content\kendo\2015.2.902\fonts\DejaVu\DejaVuSans-Bold.ttf" />
+    <Content Include="Content\kendo\2015.2.902\fonts\DejaVu\DejaVuSans-BoldOblique.ttf" />
+    <Content Include="Content\kendo\2015.2.902\fonts\DejaVu\DejaVuSans-ExtraLight.ttf" />
+    <Content Include="Content\kendo\2015.2.902\fonts\DejaVu\DejaVuSans-Oblique.ttf" />
+    <Content Include="Content\kendo\2015.2.902\fonts\DejaVu\DejaVuSans.ttf" />
+    <Content Include="Content\kendo\2015.2.902\fonts\DejaVu\DejaVuSansMono-Bold.ttf" />
+    <Content Include="Content\kendo\2015.2.902\fonts\DejaVu\DejaVuSansMono-BoldOblique.ttf" />
+    <Content Include="Content\kendo\2015.2.902\fonts\DejaVu\DejaVuSansMono-Oblique.ttf" />
+    <Content Include="Content\kendo\2015.2.902\fonts\DejaVu\DejaVuSansMono.ttf" />
+    <Content Include="Content\kendo\2015.2.902\fonts\DejaVu\DejaVuSerif-Bold.ttf" />
+    <Content Include="Content\kendo\2015.2.902\fonts\DejaVu\DejaVuSerif-BoldItalic.ttf" />
+    <Content Include="Content\kendo\2015.2.902\fonts\DejaVu\DejaVuSerif-Italic.ttf" />
+    <Content Include="Content\kendo\2015.2.902\fonts\DejaVu\DejaVuSerif.ttf" />
+    <Content Include="Content\kendo\2015.2.902\images\kendoui.ttf" />
+    <Content Include="Content\kendo\2015.2.902\images\kendoui.woff" />
+    <Content Include="ClassDiagram1.cd" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.min.js" />
+    <Content Include="Views\Content\test.json" />
+    <Content Include="packages.config" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\kendo.modernizr.custom.js" />
+    <Content Include="Scripts\jquery-2.2.0.min.map" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="ReportViewer\js\telerikReportViewer-9.1.15.731.min.js" />
@@ -723,15 +727,39 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Views\Web.config" />
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Currency.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Date.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Email.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\EmailAddress.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\GridForeignKey.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Integer.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Number.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Password.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\String.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Time.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Url.cshtml" />
+    <Content Include="Views\Home\ReportViewerView1.cshtml" />
+    <Content Include="Views\Activity\Index.cshtml" />
+    <Content Include="Views\Home\MSelect.cshtml" />
+    <Content Include="Views\ActivityModels\Create.cshtml" />
+    <Content Include="Views\ActivityModels\Delete.cshtml" />
+    <Content Include="Views\ActivityModels\Details.cshtml" />
+    <Content Include="Views\ActivityModels\Edit.cshtml" />
+    <Content Include="Views\ActivityModels\Index.cshtml" />
+    <Content Include="Views\Transact\Transact.cshtml" />
     <Content Include="Scripts\kendo\2015.2.902\jquery.min.map" />
     <Content Include="Scripts\kendo\2015.2.902\kendo.all.min.js.map" />
     <Content Include="Scripts\kendo\2015.2.902\kendo.angular.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.902\kendo.angular2.min.js.map" />
     <Content Include="Scripts\kendo\2015.2.902\kendo.aspnetmvc.min.js.map" />
     <Content Include="Scripts\kendo\2015.2.902\kendo.autocomplete.min.js.map" />
     <Content Include="Scripts\kendo\2015.2.902\kendo.binder.min.js.map" />
@@ -832,6 +860,7 @@
     <Content Include="Scripts\kendo\2015.2.902\kendo.slider.min.js.map" />
     <Content Include="Scripts\kendo\2015.2.902\kendo.sortable.min.js.map" />
     <Content Include="Scripts\kendo\2015.2.902\kendo.splitter.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.902\kendo.spreadsheet.min.js.map" />
     <Content Include="Scripts\kendo\2015.2.902\kendo.tabstrip.min.js.map" />
     <Content Include="Scripts\kendo\2015.2.902\kendo.timepicker.min.js.map" />
     <Content Include="Scripts\kendo\2015.2.902\kendo.toolbar.min.js.map" />
@@ -846,28 +875,8 @@
     <Content Include="Scripts\kendo\2015.2.902\kendo.view.min.js.map" />
     <Content Include="Scripts\kendo\2015.2.902\kendo.virtuallist.min.js.map" />
     <Content Include="Scripts\kendo\2015.2.902\kendo.web.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.902\kendo.webcomponents.min.js.map" />
     <Content Include="Scripts\kendo\2015.2.902\kendo.window.min.js.map" />
-    <Content Include="Views\Shared\EditorTemplates\Currency.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\Date.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\Email.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\EmailAddress.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\GridForeignKey.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\Integer.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\Number.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\Password.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\String.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\Time.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\Url.cshtml" />
-    <Content Include="Views\Home\ReportViewerView1.cshtml" />
-    <Content Include="Views\Activity\Index.cshtml" />
-    <Content Include="Views\Home\MSelect.cshtml" />
-    <Content Include="Views\ActivityModels\Create.cshtml" />
-    <Content Include="Views\ActivityModels\Delete.cshtml" />
-    <Content Include="Views\ActivityModels\Details.cshtml" />
-    <Content Include="Views\ActivityModels\Edit.cshtml" />
-    <Content Include="Views\ActivityModels\Index.cshtml" />
-    <Content Include="Views\Transact\Transact.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Site.css" />
@@ -919,6 +928,11 @@
       <UserProperties UseCdnSupport="False" />
     </VisualStudio>
   </ProjectExtensions>
+  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
+  <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">
+    <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=317567." HelpKeyword="BCLBUILD2001" />
+    <Error Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="The build restored NuGet packages. Build the project again to include these packages in the build. For more information, see http://go.microsoft.com/fwlink/?LinkID=317568." HelpKeyword="BCLBUILD2002" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
