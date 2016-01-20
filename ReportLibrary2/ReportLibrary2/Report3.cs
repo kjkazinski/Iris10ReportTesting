@@ -117,14 +117,15 @@ namespace ReportLibrary2
             }
 
             for (int c = 0; c < data.SumOrCount.Length; c++)
-                     {
-                      SumOrCount("=Fields." + data.SumOrCount.GetValue(c).ToString().Substring(1, data.SumOrCount.GetValue(c).ToString().Length - 2), data.AggregateType.GetValue(c).ToString(), "Fields." + data.SumOrCount.GetValue(c).ToString().Substring(1, data.SumOrCount.GetValue(c).ToString().Length - 2));
-                     }
+            {
+                SumOrCount("=Fields." + data.SumOrCount.GetValue(c).ToString().Substring(1, data.SumOrCount.GetValue(c).ToString().Length - 2), data.AggregateType.GetValue(c).ToString(), "Fields." + data.SumOrCount.GetValue(c).ToString().Substring(1, data.SumOrCount.GetValue(c).ToString().Length - 2));
+            }
+            if (data.AddReportFooterSection == true)
+            {
+                AddReportFooterSection(data);
+            }
 
-                     AddReportFooterSection(0, "Fields." + data.AddReportFooterSection.ToString(),"Report Footer");
-
-
-                     ChangeSqlString(data.ConnectionString);
+            ChangeSqlString(data.ConnectionString);
             SQLCommandString = data.SelectCommand;
 
             
@@ -285,16 +286,6 @@ namespace ReportLibrary2
             }
         }
 
-        public static void AddDateFilter(string start,string end)
-        {
-            StartDate = start;
-            EndDate = end;
-            Debug.WriteLine(StartDate + " " + EndDate);
-            dateFilter = true;
-        }
-
-       
-
         public static void ChangeSqlString(string sqlCon)
         {
             SqlConnectionString = sqlCon;
@@ -316,24 +307,42 @@ namespace ReportLibrary2
             }
         }
 
-        public static void AddReportFooterSection(int sumOrCount, string section, string name)
+        public static void AddReportFooterSection(ReportModel data)
         {
-            var sumCount = new TextBox();
             var totalBox = new TextBox();
-                     Debug.WriteLine("my name is: " + name);
-                     //int spot = GetPosition(name);
-                     int spot = 2;
+            string name = "";
+            
+            Debug.WriteLine("MyAggs: " + data.AggregateType.Length);
+            for (int i = 0; i < data.AggregateType.Length; i++)
+            {
+                Debug.WriteLine("My agg val: " + data.AggregateType.GetValue(i).ToString());
+                var sumCount = new TextBox();
+                string typeFlag;
+                string field;
+                typeFlag = data.AggregateType.GetValue(i).ToString();
+                field = "Fields." + data.SumOrCount.GetValue(i).ToString().Substring(1, data.SumOrCount.GetValue(i).ToString().Length - 2);
+                name = "=Fields." + data.SumOrCount.GetValue(i).ToString().Substring(1, data.SumOrCount.GetValue(i).ToString().Length - 2);
+                Debug.WriteLine("My Name is: " + name);
+                int spot = GetDataPosition(name);
 
-            if (sumOrCount == 1)
-            {
-                sumCount = GenerateAttributes(MyCaptionBoxes[spot].Location, "= Sum(" + section + ")", name, "{0:$#,0.00}");
+                if (typeFlag.Contains("sum"))
+                {
+
+                    sumCount = GenerateAttributes(MyDataBoxes[spot].Location, "= Sum(" + field + ")", "", "{0:$#,0.00}");
+                }
+                else if (typeFlag.Contains("count"))
+                {
+                    sumCount = GenerateAttributes(MyDataBoxes[spot].Location, "= Count(" + field + ")", "", "{0:#,0}");
+                }
+
+                else if (typeFlag.Contains("average"))
+                {
+                    sumCount = GenerateAttributes(MyDataBoxes[spot].Location, "= Avg(" + field + ")", "", "{0:$#,0.00}");
+                }
+
+                ReportFooter.Items.Add(sumCount);
             }
-            else
-            {
-                sumCount = GenerateAttributes(MyCaptionBoxes[spot].Location, "= Count(" + section + ")", name, "{0:$#,0.00}");
-            }
-        
-            ReportFooter.Items.Add(sumCount);
+
             totalBox = GenerateAttributes(MyCaptionBoxes[0].Location, "Grand Total: ", name, "{0:$#,0.00}");
             ReportFooter.Items.Add(totalBox);
             ReportFooter.Style.BackgroundColor = Color.FromArgb(89, 220, 216);
@@ -389,10 +398,10 @@ namespace ReportLibrary2
             }
 
             else if (typeFlag.Contains("average"))
-                     {
-                            sumCount = GenerateAttributes(MyDataBoxes[spot].Location, "= Avg(" + field + ")", "", "{0:$#,0.00}");
-                            FooterSections[GroupCount].Items.Add(sumCount);
-                     }
+            {
+                sumCount = GenerateAttributes(MyDataBoxes[spot].Location, "= Avg(" + field + ")", "", "{0:$#,0.00}");
+                FooterSections[GroupCount].Items.Add(sumCount);
+            }
         }
 
         public static void GenerateTextField(string title, string data) //Adds labels

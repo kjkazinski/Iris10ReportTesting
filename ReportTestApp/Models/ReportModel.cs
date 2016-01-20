@@ -42,7 +42,7 @@ namespace IrisWeb.Reports.Model
 
         public List<string> Filters { get; set; }
 
-        public string AddReportFooterSection { get; set; }
+        public bool AddReportFooterSection { get; set; }
 
         public string AddPageNumbers { get; set; }
 

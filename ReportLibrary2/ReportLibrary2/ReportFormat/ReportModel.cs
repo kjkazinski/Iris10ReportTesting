@@ -26,7 +26,7 @@ namespace ReportFormat.Model
             SumOrCount = jUser["SumOrCount"].ToArray();
             AggregateType = jUser["AggregateType"].ToArray();
             ChangeBandColor = jUser["ChangeBandColor"].ToArray();
-            AddReportFooterSection = (string) jUser["AddReportFooterSection"];
+            AddReportFooterSection = (bool) jUser["AddReportFooterSection"];
             AddPageNumbers = (string) jUser["AddPageNumbers"];
             GroupName = jUser["GroupName"].ToArray();
               }
@@ -62,7 +62,7 @@ namespace ReportFormat.Model
 
         public Array Filters { get; set; }
 
-        public string AddReportFooterSection { get; set; }
+        public bool AddReportFooterSection { get; set; }
         public string AddPageNumbers { get; set; }
         public Array AggregateType { get; set; }
 
