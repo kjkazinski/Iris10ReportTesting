@@ -245,7 +245,12 @@ C:\Users\temer\Documents\GitHub\Iris10ReportTesting\ReportTestApp\bin\Telerik.Re
 C:\Users\temer\Documents\GitHub\Iris10ReportTesting\ReportTestApp\bin\Telerik.ReportViewer.Mvc.dll
 C:\Users\temer\Documents\GitHub\Iris10ReportTesting\ReportTestApp\bin\Telerik.ReportViewer.WinForms.dll
 C:\Users\temer\Documents\GitHub\Iris10ReportTesting\ReportTestApp\bin\Telerik.ReportViewer.Wpf.dll
+C:\Users\temer\Documents\GitHub\Iris10ReportTesting\ReportTestApp\bin\Telerik.Web.Spreadsheet.dll
 C:\Users\temer\Documents\GitHub\Iris10ReportTesting\ReportTestApp\bin\WebGrease.dll
+C:\Users\temer\Documents\GitHub\Iris10ReportTesting\ReportTestApp\bin\Telerik.Windows.Documents.Spreadsheet.dll
+C:\Users\temer\Documents\GitHub\Iris10ReportTesting\ReportTestApp\bin\Telerik.Windows.Documents.Core.dll
+C:\Users\temer\Documents\GitHub\Iris10ReportTesting\ReportTestApp\bin\Telerik.Windows.Documents.Spreadsheet.FormatProviders.OpenXml.dll
+C:\Users\temer\Documents\GitHub\Iris10ReportTesting\ReportTestApp\bin\Telerik.Windows.Zip.dll
 C:\Users\temer\Documents\GitHub\Iris10ReportTesting\ReportTestApp\bin\ReportLibrary2.pdb
 C:\Users\temer\Documents\GitHub\Iris10ReportTesting\ReportTestApp\bin\Antlr3.Runtime.pdb
 C:\Users\temer\Documents\GitHub\Iris10ReportTesting\ReportTestApp\bin\EntityFramework.xml
@@ -275,6 +280,11 @@ C:\Users\temer\Documents\GitHub\Iris10ReportTesting\ReportTestApp\bin\Telerik.Re
 C:\Users\temer\Documents\GitHub\Iris10ReportTesting\ReportTestApp\bin\Telerik.ReportViewer.WinForms.xml
 C:\Users\temer\Documents\GitHub\Iris10ReportTesting\ReportTestApp\bin\Telerik.ReportViewer.Wpf.pdb
 C:\Users\temer\Documents\GitHub\Iris10ReportTesting\ReportTestApp\bin\Telerik.ReportViewer.Wpf.xml
+C:\Users\temer\Documents\GitHub\Iris10ReportTesting\ReportTestApp\bin\Telerik.Web.Spreadsheet.xml
+C:\Users\temer\Documents\GitHub\Iris10ReportTesting\ReportTestApp\bin\Telerik.Windows.Documents.Spreadsheet.xml
+C:\Users\temer\Documents\GitHub\Iris10ReportTesting\ReportTestApp\bin\Telerik.Windows.Documents.Core.xml
+C:\Users\temer\Documents\GitHub\Iris10ReportTesting\ReportTestApp\bin\Telerik.Windows.Documents.Spreadsheet.FormatProviders.OpenXml.xml
+C:\Users\temer\Documents\GitHub\Iris10ReportTesting\ReportTestApp\bin\Telerik.Windows.Zip.xml
 C:\Users\temer\Documents\GitHub\Iris10ReportTesting\ReportTestApp\obj\Debug\ReportTestApp.csproj.App.config
 C:\Users\temer\Documents\GitHub\Iris10ReportTesting\ReportTestApp\obj\Debug\ReportTestApp.csprojResolveAssemblyReference.cache
 C:\Users\temer\Documents\GitHub\Iris10ReportTesting\ReportTestApp\obj\Debug\ReportTestApp.dll
