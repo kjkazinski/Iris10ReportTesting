@@ -70,8 +70,7 @@ namespace ReportLibrary2
                 using (var xw = XmlWriter.Create(sw))
                 {
                     // Build Xml with xw.
-                    Telerik.Reporting.XmlSerialization.ReportXmlSerializer xmlSerializer =
-                    new Telerik.Reporting.XmlSerialization.ReportXmlSerializer();
+                    var xmlSerializer = new Telerik.Reporting.XmlSerialization.ReportXmlSerializer();
 
                     xmlSerializer.Serialize(xw, this.Report);
 
@@ -83,7 +82,7 @@ namespace ReportLibrary2
 
         public static void GetJSON(string json)
         {
-            ReportModel data = new ReportModel(json);
+            var data = new ReportModel(json);
             ResetDefaults();
             GenerateHeaderFooters();
             for (int k = 0; k < data.GenerateTitleField.Length; k++)
@@ -196,7 +195,7 @@ namespace ReportLibrary2
         {
             obj = obj.Replace('|', ',');
             Dictionary<string, string> values = JsonConvert.DeserializeObject<Dictionary<string, string>>(obj);
-            Filter reportFilter = new Filter("=Fields."+values["field"],GetOper(values["operator"]), FixValue(values["operator"],values["value"]));
+            var reportFilter = new Filter("=Fields."+values["field"],GetOper(values["operator"]), FixValue(values["operator"],values["value"]));
             MyFilters[FilterCount] = reportFilter;
             FilterCount++;
         }
@@ -238,7 +237,7 @@ namespace ReportLibrary2
 
             totalBox = GenerateAttributes(MyCaptionBoxes[0].Location, "Grand Total: ", name, "{0:$#,0.00}");
             ReportFooter.Items.Add(totalBox);
-            ReportFooter.Style.BackgroundColor = Color.FromArgb(89, 220, 216);
+            ReportFooter.Style.BackgroundColor = Color.FromArgb(89, 220, 216); //background color of overall report footer
             AddReportFooter = true;
         }
 
