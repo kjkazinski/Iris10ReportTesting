@@ -23,18 +23,8 @@ namespace ReportLibrary2
         public static ReportFooterSection ReportFooter = new ReportFooterSection();
         public static DetailSection Detail = new DetailSection();
         public static String SqlConnectionString;
-        public static String SQLCommandString;
-        public static string CountyName;
-        public static string SortOption;
-        public static SortDirection MySortDirection;
-        public static bool SortMe = false;
+        public static String SqlCommandString;
         public static SqlDataSource SqlDataSource1 = new SqlDataSource();
-        public static Report Report1 = new Report();
-        public static string StartDate;
-        public static string EndDate;
-        public static bool dateFilter = false;
-        public static bool groupBy = false;
-        public static string myGrouping = "";
 
 
         //TextBox Vars
@@ -52,15 +42,10 @@ namespace ReportLibrary2
         public static GroupFooterSection[] FooterSections = new GroupFooterSection[50];
         public static Telerik.Reporting.Group[] AllGroups = new Telerik.Reporting.Group[50];
         public static int GroupCount = 0;
-        public static int Summing = 1;
-        public static int Counting = 0;
         public static SizeU TBSize = new SizeU(Unit.Inch(CapLocX), Unit.Inch(TBHeight));
-        public static int ColorR = 121;
-        public static int ColorG = 167;
-        public static int ColorB = 227;
         public static Filter[] MyFilters = new Filter[50];
         public static int FilterCount = 0;
-        public static string myString = "";
+        public static string MyString = "";
 
 
         public Report3()
@@ -91,7 +76,7 @@ namespace ReportLibrary2
                     xmlSerializer.Serialize(xw, this.Report);
 
                 }
-                myString = sw.ToString();
+                MyString = sw.ToString();
             }
             #endregion
         }
@@ -124,7 +109,7 @@ namespace ReportLibrary2
             }
 
             ChangeSqlString(data.ConnectionString);
-            SQLCommandString = data.SelectCommand;
+            SqlCommandString = data.SelectCommand;
 
             
         }
@@ -337,8 +322,6 @@ namespace ReportLibrary2
             }
             FilterCount = 0;
             GroupCount = 0;
-            Summing = 1;
-            Counting = 0;
             GroupLoc = 0.14083333395421505D;
 
             Detail.Items.Clear();
@@ -351,7 +334,7 @@ namespace ReportLibrary2
             ((ISupportInitialize)(this)).BeginInit();
             SqlDataSource1.ConnectionString = SqlConnectionString;
             SqlDataSource1.Name = "sqlDataSource1";
-            SqlDataSource1.SelectCommand = SQLCommandString;
+            SqlDataSource1.SelectCommand = SqlCommandString;
             
             this.DataSource = SqlDataSource1;
             for (int i = 0; i < (GroupCount + 1); i++)
