@@ -31,7 +31,7 @@ namespace ReportLibrary2
         private static int count = 0;
         public static TextBox[] MyCaptionBoxes = new TextBox[50];
         public static TextBox[] MyDataBoxes = new TextBox[50];
-        public static double CapLocX = 1.2666666507720947D;
+        public static double CapLocX = 0.8666666507720947D;
         public static double CapLocY = 0.14083333395421505D;
         public static double GroupLoc = 0.14083333395421505D;
         public static double TBHeight = 0.44166669249534607D;
