@@ -79,6 +79,7 @@ namespace ReportLibrary2
                 Report.Filters.Add(MyFilters[i]);
             }
 
+            #region //This code creates an XML object
             using (var sw = new StringWriter())
             {
                 using (var xw = XmlWriter.Create(sw))
@@ -92,14 +93,11 @@ namespace ReportLibrary2
                 }
                 myString = sw.ToString();
             }
-
-            Debug.WriteLine("not XML: " + Detail.Items[0]);
-
+            #endregion
         }
 
         public static void GetJSON(string json)
         {
-            Debug.WriteLine("JSON: " + json);
             ReportModel data = new ReportModel(json);
             ResetDefaults();
             GenerateHeaderFooters();
@@ -131,6 +129,7 @@ namespace ReportLibrary2
             
         }
 
+        //Example XML object from report
         public static void SetXMLObject()
         {
             //Fill in code to save this to a seperate class
@@ -207,89 +206,19 @@ namespace ReportLibrary2
 
             */
         }
-
-
+        
         public static void CreateFilterOption(string obj)
         {
-            //var field = "";
-            //var operand = "";
-            //var val = "";
             obj = obj.Replace('|', ',');
             Dictionary<string, string> values = JsonConvert.DeserializeObject<Dictionary<string, string>>(obj);
             Filter reportFilter = new Filter("=Fields."+values["field"],GetOper(values["operator"]), FixValue(values["operator"],values["value"]));
-            //Filter Test
-            // Filter reportFilter = new Filter("=Fields.Name", FilterOperator.LessThan, "10");
-            //Report.Filters.Add(reportFilter);
-            // Filter groupFilter = new Filter("=Fields.Description", FilterOperator.NotLike, "%C");
-            // Report.Filters.Add(groupFilter);
-            // Filter dateFilter1 = new Filter("=Fields.DateStamp", FilterOperator.GreaterOrEqual, "=parameters.StartDate.Value");
-            // Report.Filters.Add(dateFilter1);
-            // Filter dateFilter2 = new Filter("=Fields.DateStamp", FilterOperator.LessOrEqual, "=parameters.EndDate.Value");
             MyFilters[FilterCount] = reportFilter;
             FilterCount++;
-
-
-            
-            Debug.WriteLine("obj1: " + values["field"]);
         }
         
-        private static FilterOperator GetOper(string op)
-        {
-            switch (op)
-            {
-                case "contains":
-                    return FilterOperator.Like;
-                case "endswith":
-                    return FilterOperator.Like;
-                case "eq":
-                    return FilterOperator.Equal;
-                case "neq":
-                    return FilterOperator.NotEqual;
-                case "startswith":
-                    return FilterOperator.Like;
-                case "doesnotcontain":
-                    return FilterOperator.NotLike;
-                case "lte":
-                    return FilterOperator.LessOrEqual;
-                case "lt":
-                    return FilterOperator.LessThan;
-                case "gte":
-                    return FilterOperator.GreaterOrEqual;
-                case "gt":
-                    return FilterOperator.GreaterThan;
-                
-            }
-            return FilterOperator.Equal;
-        }
-
-        private static string FixValue(string op,string val)
-        {
-            if(op == "contains")
-            {
-                return "%" + val + "%";
-            }
-            else if(op == "doesnotcontain")
-            {
-                return "%" + val + "%";
-            }
-            else if(op == "endswith")
-            {
-                return "%" + val;
-            }
-            else if (op == "startswith")
-            {
-                return val+"%";
-            }
-            else
-            {
-                return val;
-            }
-        }
-
         public static void ChangeSqlString(string sqlCon)
         {
             SqlConnectionString = sqlCon;
-            Debug.WriteLine("THIS IS FROM THE REPORT " + SqlConnectionString);
         }
 
         public static void GenerateHeaderFooters()
@@ -311,36 +240,15 @@ namespace ReportLibrary2
         {
             var totalBox = new TextBox();
             string name = "";
-            
-            Debug.WriteLine("MyAggs: " + data.AggregateType.Length);
             for (int i = 0; i < data.AggregateType.Length; i++)
             {
-                Debug.WriteLine("My agg val: " + data.AggregateType.GetValue(i).ToString());
-                var sumCount = new TextBox();
                 string typeFlag;
                 string field;
                 typeFlag = data.AggregateType.GetValue(i).ToString();
                 field = "Fields." + data.SumOrCount.GetValue(i).ToString().Substring(1, data.SumOrCount.GetValue(i).ToString().Length - 2);
                 name = "=Fields." + data.SumOrCount.GetValue(i).ToString().Substring(1, data.SumOrCount.GetValue(i).ToString().Length - 2);
-                Debug.WriteLine("My Name is: " + name);
                 int spot = GetDataPosition(name);
-
-                if (typeFlag.Contains("sum"))
-                {
-
-                    sumCount = GenerateAttributes(MyDataBoxes[spot].Location, "= Sum(" + field + ")", "", "{0:$#,0.00}");
-                }
-                else if (typeFlag.Contains("count"))
-                {
-                    sumCount = GenerateAttributes(MyDataBoxes[spot].Location, "= Count(" + field + ")", "", "{0:#,0}");
-                }
-
-                else if (typeFlag.Contains("average"))
-                {
-                    sumCount = GenerateAttributes(MyDataBoxes[spot].Location, "= Avg(" + field + ")", "", "{0:$#,0.00}");
-                }
-
-                ReportFooter.Items.Add(sumCount);
+                ReportFooter.Items.Add(FooterHelper(typeFlag,field, spot));
             }
 
             totalBox = GenerateAttributes(MyCaptionBoxes[0].Location, "Grand Total: ", name, "{0:$#,0.00}");
@@ -383,83 +291,25 @@ namespace ReportLibrary2
 
         public static void SumOrCount(string name, string typeFlag, string field)
         {
-            var sumCount = new TextBox();
             int spot = GetDataPosition(name);
-            if (typeFlag.Contains("sum"))
-            {
-
-                sumCount = GenerateAttributes(MyDataBoxes[spot].Location, "= Sum(" + field + ")", "", "{0:$#,0.00}");
-                FooterSections[GroupCount].Items.Add(sumCount);
-            }
-            else if (typeFlag.Contains("count"))
-            {
-                sumCount = GenerateAttributes(MyDataBoxes[spot].Location, "= Count(" + field + ")", "", "{0:#,0}");
-                FooterSections[GroupCount].Items.Add(sumCount);
-            }
-
-            else if (typeFlag.Contains("average"))
-            {
-                sumCount = GenerateAttributes(MyDataBoxes[spot].Location, "= Avg(" + field + ")", "", "{0:$#,0.00}");
-                FooterSections[GroupCount].Items.Add(sumCount);
-            }
+            FooterSections[GroupCount].Items.Add(FooterHelper(typeFlag,field,spot));
         }
-
+        
         public static void GenerateTextField(string title, string data) //Adds labels
         {
             var boxLoc = new PointU(Unit.Inch(CapLocX), Unit.Inch(CapLocY));
             MyCaptionBoxes[count] = GenerateAttributes(boxLoc, title, title, "{0}");
-            Debug.WriteLine("Count: "+GroupCount);
-            Debug.WriteLine("data here: " + title+" "+data);
             HeaderSections[GroupCount].Items.Add(MyCaptionBoxes[count]);
             MyDataBoxes[count] = GenerateAttributes(boxLoc, data, title, "{0:$#,0.00}");
             Detail.Items.Add(MyDataBoxes[count]);
             CapLocX += 1.3666666507720947D;
             count++;
         }
-
-
-        private static TextBox GenerateAttributes(PointU loc, string value, string name, string format)
-        {
-            var retBox = new TextBox();
-            retBox.CanGrow = true;
-            retBox.Size = TBSize;
-            retBox.Location = loc;
-            retBox.Value = value;
-            retBox.Name = name;
-            if (Regex.IsMatch(name, "date", RegexOptions.IgnoreCase) == false && Regex.IsMatch(name, "last", RegexOptions.IgnoreCase) == false) //all number formats except date
-            {
-                retBox.Format = format;
-            }
-            return retBox;
-        }
-
-        private static int GetPosition(string name)
-        {
-            for (int i = 0; i < MyCaptionBoxes.Length; i++)
-            {
-                if (MyCaptionBoxes[i].Name == name)
-                {
-                    return i;
-                }
-            }
-            return -1;
-        }
-
-              private static int GetDataPosition(string name)
-              {
-                     for (int i = 0; i < MyDataBoxes.Length; i++)
-                     {
-                            if (MyDataBoxes[i].Value == name)
-                            {
-                                   return i;
-                            }
-                     }
-                     return -1;
-              }
+        
               /// <summary>
               /// Refreshes the data on the telerik report so new data can be added.
               /// </summary>
-              public static void ResetDefaults()
+        public static void ResetDefaults()
         {
             for (int i = 0; i < count; i++)
             {
@@ -495,16 +345,10 @@ namespace ReportLibrary2
             count = 0;
             CapLocX = 1.2666666507720947D;
         }
-
-              //this test   
+   
         private void InitializeComponent2()
         {
-            
             ((ISupportInitialize)(this)).BeginInit();
-            
-            // 
-            // sqlDataSource1
-            // 
             SqlDataSource1.ConnectionString = SqlConnectionString;
             SqlDataSource1.Name = "sqlDataSource1";
             SqlDataSource1.SelectCommand = SQLCommandString;
@@ -516,63 +360,111 @@ namespace ReportLibrary2
             }
             this.Items.Add(Detail);
             if (AddReportFooter) { this.Items.Add(ReportFooter); }
-
-
-            //group1.GroupFooter = GroupFooter;
-            //group1.GroupHeader = GroupHeader;
-            //group1.Name = "labelsGroup";
-            //this.Groups.AddRange(new Telerik.Reporting.Group[] {
-            //group1});
-            //this.Items.AddRange(new Telerik.Reporting.ReportItemBase[] {
-            //GroupHeader,
-            //GroupFooter,
-            //PageHeader,
-            //PageFooter,
-            //ReportHeader,
-            //ReportFooter,
-            //DetailSection});
-            //this.Name = "Report3";
-            //this.PageSettings.Margins = new Telerik.Reporting.Drawing.MarginsU(Telerik.Reporting.Drawing.Unit.Inch(1D), Telerik.Reporting.Drawing.Unit.Inch(1D), Telerik.Reporting.Drawing.Unit.Inch(1D), Telerik.Reporting.Drawing.Unit.Inch(1D));
-            //this.PageSettings.PaperKind = System.Drawing.Printing.PaperKind.Letter;
-            //styleRule1.Selectors.AddRange(new Telerik.Reporting.Drawing.ISelector[] {
-            //new Telerik.Reporting.Drawing.TypeSelector(typeof(Telerik.Reporting.TextItemBase)),
-            //new Telerik.Reporting.Drawing.TypeSelector(typeof(Telerik.Reporting.HtmlTextBox))});
-            //styleRule1.Style.Padding.Left = Telerik.Reporting.Drawing.Unit.Point(2D);
-            //styleRule1.Style.Padding.Right = Telerik.Reporting.Drawing.Unit.Point(2D);
-            //styleRule2.Selectors.AddRange(new Telerik.Reporting.Drawing.ISelector[] {
-            //new Telerik.Reporting.Drawing.StyleSelector("Title")});
-            //styleRule2.Style.Color = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(34)))), ((int)(((byte)(77)))));
-            //styleRule2.Style.Font.Name = "Calibri";
-            //styleRule2.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(18D);
-            //styleRule3.Selectors.AddRange(new Telerik.Reporting.Drawing.ISelector[] {
-            //new Telerik.Reporting.Drawing.StyleSelector("Caption")});
-            //styleRule3.Style.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(ColorR)))), ((int)(((byte)(ColorG)))), ((int)(((byte)(ColorB)))));
-            //styleRule3.Style.Color = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(34)))), ((int)(((byte)(77)))));
-            //styleRule3.Style.Font.Name = "Calibri";
-            //styleRule3.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(10D);
-            //styleRule3.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
-            //styleRule4.Selectors.AddRange(new Telerik.Reporting.Drawing.ISelector[] {
-            //new Telerik.Reporting.Drawing.StyleSelector("Data")});
-            //styleRule4.Style.Color = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(34)))), ((int)(((byte)(77)))));
-            //styleRule4.Style.Font.Name = "Calibri";
-            //styleRule4.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(9D);
-            //styleRule4.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
-            //styleRule5.Selectors.AddRange(new Telerik.Reporting.Drawing.ISelector[] {
-            //new Telerik.Reporting.Drawing.StyleSelector("PageInfo")});
-            //styleRule5.Style.Color = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(34)))), ((int)(((byte)(77)))));
-            //styleRule5.Style.Font.Name = "Calibri";
-            //styleRule5.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(8D);
-            //styleRule5.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
-            //this.StyleSheet.AddRange(new Telerik.Reporting.Drawing.StyleRule[] {
-            //styleRule1,
-            //styleRule2,
-            //styleRule3,
-            //styleRule4,
-            //styleRule5});
-            //this.Width = Telerik.Reporting.Drawing.Unit.Inch(6.4583334922790527D);
             ((ISupportInitialize)(this)).EndInit();
+        }
+    }
 
+
+    //Helper Functions
+    public partial class Report3 : Report
+    {
+        private static TextBox FooterHelper(string type, string field, int spot)
+        {
+            var sumCount = new TextBox();
+            if (type.Contains("sum"))
+            {
+
+                sumCount = GenerateAttributes(MyDataBoxes[spot].Location, "= Sum(" + field + ")", "", "{0:$#,0.00}");
+            }
+            else if (type.Contains("count"))
+            {
+                sumCount = GenerateAttributes(MyDataBoxes[spot].Location, "= Count(" + field + ")", "", "{0:#,0}");
+            }
+            else if (type.Contains("average"))
+            {
+                sumCount = GenerateAttributes(MyDataBoxes[spot].Location, "= Avg(" + field + ")", "", "{0:$#,0.00}");
+            }
+            return sumCount;
         }
 
+        private static TextBox GenerateAttributes(PointU loc, string value, string name, string format)
+        {
+            var retBox = new TextBox();
+            retBox.CanGrow = true;
+            retBox.Size = TBSize;
+            retBox.Location = loc;
+            retBox.Value = value;
+            retBox.Name = name;
+            if (Regex.IsMatch(name, "date", RegexOptions.IgnoreCase) == false && Regex.IsMatch(name, "last", RegexOptions.IgnoreCase) == false) //all number formats except date
+            {
+                retBox.Format = format;
+            }
+            return retBox;
+        }
+
+        private static int GetDataPosition(string name)
+        {
+            for (int i = 0; i < MyDataBoxes.Length; i++)
+            {
+                if (MyDataBoxes[i].Value == name)
+                {
+                    return i;
+                }
+            }
+            return -1;
+        }
+
+        private static string FixValue(string op, string val)
+        {
+            if (op == "contains")
+            {
+                return "%" + val + "%";
+            }
+            else if (op == "doesnotcontain")
+            {
+                return "%" + val + "%";
+            }
+            else if (op == "endswith")
+            {
+                return "%" + val;
+            }
+            else if (op == "startswith")
+            {
+                return val + "%";
+            }
+            else
+            {
+                return val;
+            }
+        }
+
+        private static FilterOperator GetOper(string op)
+        {
+            switch (op)
+            {
+                case "contains":
+                    return FilterOperator.Like;
+                case "endswith":
+                    return FilterOperator.Like;
+                case "eq":
+                    return FilterOperator.Equal;
+                case "neq":
+                    return FilterOperator.NotEqual;
+                case "startswith":
+                    return FilterOperator.Like;
+                case "doesnotcontain":
+                    return FilterOperator.NotLike;
+                case "lte":
+                    return FilterOperator.LessOrEqual;
+                case "lt":
+                    return FilterOperator.LessThan;
+                case "gte":
+                    return FilterOperator.GreaterOrEqual;
+                case "gt":
+                    return FilterOperator.GreaterThan;
+
+            }
+            return FilterOperator.Equal;
+        }
     }
 }
